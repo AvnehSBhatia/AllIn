@@ -1,0 +1,51 @@
+import { config } from "@/lib/config";
+import { AcesCount, HiddenAce } from "@/components/ui/Aces";
+
+export function Footer() {
+  return (
+    <footer className="relative overflow-clip border-t border-hair px-5 pt-20 pb-8 md:px-10">
+      <div className="mx-auto max-w-[1440px]">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-[minmax(0,1fr)_auto]">
+          <div>
+            <p className="label text-text-3">{config.umbrella}</p>
+            <p className="mt-6 max-w-[34ch] text-lg text-ivory">{config.safety}</p>
+            {config.contactEmail && (
+              <a href={`mailto:${config.contactEmail}`} className="link mt-6 inline-block font-mono text-sm text-text-2 hover:text-ivory">
+                {config.contactEmail}
+              </a>
+            )}
+          </div>
+          <nav aria-label="Footer">
+            <ul className="grid grid-cols-2 gap-x-10 gap-y-3 font-mono text-xs tracking-[0.14em] uppercase">
+              {[...config.nav, { label: "Apply", href: "#apply" }].map((n) => (
+                <li key={n.href}>
+                  <a href={n.href} className="link text-text-2 hover:text-ivory">
+                    {n.label}
+                  </a>
+                </li>
+              ))}
+              {config.socials.map((s) => (
+                <li key={s.href}>
+                  <a href={s.href} className="link text-text-2 hover:text-ivory" rel="noopener" target="_blank">
+                    {s.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+
+        {/* Watermark drawn as generated content: it is ornament, not text, so contrast checkers leave it alone. */}
+        <div aria-hidden className="display mt-20 text-center text-[clamp(6rem,27vw,26rem)] leading-[0.78] text-ivory/[0.07] select-none before:content-['ALL_'] after:italic after:content-['IN']" />
+
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-hair-soft pt-6 font-mono text-[11px] tracking-[0.12em] text-text-3 uppercase">
+          <span>© {config.organizer}</span>
+          <span className="flex items-center gap-3">
+            Aces found <AcesCount />
+            <HiddenAce suit="clubs" rotate={-6} />
+          </span>
+        </div>
+      </div>
+    </footer>
+  );
+}
