@@ -5,8 +5,8 @@ export const TW = 1100;
 export const TH = 620;
 export const TILT_X = 28; // deg
 export const TILT_Z = -7; // deg
-const CX = TW / 2;
-const CY = TH / 2;
+export const CX = TW / 2;
+export const CY = TH / 2;
 
 /** Eight seats on the rail of a stadium-shaped table. */
 const R = 287; // rail centerline radius at the rounded ends
@@ -67,6 +67,13 @@ export function newHand(id: number): Hand {
 }
 
 export const DECISIONS = ["raises 240", "calls 120", "checks", "raises 480", "folds", "bets 160", "re-raises 720", "calls 240"];
+const ACTS = ["RAISE 240", "CALL 120", "CHECK", "RAISE 480", "BET 160", "3-BET 720", "CALL 240"];
+/** A plausible [ev, action] pair for a seat's screen. */
+export function decide(): [string, string] {
+  const ev = Math.random() * 0.7 - 0.1;
+  return [`${ev >= 0 ? "+" : ""}${ev.toFixed(2)}`, ACTS[(Math.random() * ACTS.length) | 0]];
+}
+
 export function fakeDecision(name: string) {
   const d = DECISIONS[(Math.random() * DECISIONS.length) | 0];
   const ev = (Math.random() * 0.8 - 0.25).toFixed(2);

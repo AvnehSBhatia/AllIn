@@ -1,38 +1,15 @@
-"use client";
-import { useRef, type CSSProperties } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { type CSSProperties } from "react";
 import { config } from "@/lib/config";
 import { CHIP_COLORS, Chip } from "@/components/ui/Chip";
-import { HiddenAce } from "@/components/ui/Aces";
 
 // Stack heights follow the prize amounts.
 const HEIGHT = [16, 7, 7, 4];
 
-/** Four prizes as four stacks of chips that drop onto the felt with some weight. */
+/** Four prizes as four stacks of chips on the felt. */
 export function Prizes() {
-  const ref = useRef<HTMLElement>(null);
   const p = config.prizes;
-  useGSAP(
-    () => {
-      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      gsap.utils.toArray<HTMLElement>(".pz-stack", ref.current).forEach((stack, si) => {
-        const chips = Array.from(stack.children).reverse(); // bottom chip lands first
-        gsap.from(chips, {
-          y: -260,
-          opacity: 0,
-          duration: 0.42,
-          ease: "bounce.out",
-          stagger: 0.035,
-          delay: si * 0.12,
-          scrollTrigger: { trigger: ".pz-row", start: "top 75%", once: true },
-        });
-      });
-    },
-    { scope: ref },
-  );
-
   return (
-    <section ref={ref} id="prizes" aria-labelledby="prizes-title" className="relative px-5 py-24 md:px-10 md:py-36">
+    <section id="prizes" aria-labelledby="prizes-title" className="relative px-5 py-24 md:px-10 md:py-36">
       <div className="mx-auto max-w-[1440px]">
         <p className="label text-text-3">Prizes</p>
         <div className="mt-5 flex flex-wrap items-end justify-between gap-6">
@@ -43,8 +20,7 @@ export function Prizes() {
         </div>
 
         <div className="felt relative mt-14 rounded-2xl px-5 pt-14 pb-8 md:px-12 md:pt-20 md:pb-12">
-          <HiddenAce suit="diamonds" rotate={21} className="absolute top-4 right-4 md:top-6 md:right-8" />
-          <ul className="pz-row grid grid-cols-2 gap-x-6 gap-y-14 md:grid-cols-[1.5fr_1fr_1fr_1fr] md:gap-10">
+          <ul className="grid grid-cols-2 gap-x-6 gap-y-14 md:grid-cols-[1.5fr_1fr_1fr_1fr] md:gap-10">
             {p.items.map((it, i) => (
               <li key={it.title} className={`flex flex-col ${i === 0 ? "col-span-2 md:col-span-1" : ""}`}>
                 <div className={`flex items-end md:h-[260px] ${i === 0 ? "h-[210px]" : "h-[130px]"}`} aria-hidden>
@@ -70,7 +46,7 @@ function Stack({ color, n, wide }: { color: keyof typeof CHIP_COLORS; n: number;
   const { base, stripe } = CHIP_COLORS[color];
   const w = wide ? 132 : 96;
   return (
-    <div className="pz-stack relative flex flex-col items-center" style={{ width: w } as CSSProperties}>
+    <div className="relative flex flex-col items-center" style={{ width: w } as CSSProperties}>
       <div className="relative z-10 -mb-[7px] w-full" style={{ height: Math.round(w * 0.4) }}>
         <Chip color={color} className="absolute inset-x-0 top-1/2 w-full -translate-y-1/2 scale-y-[0.4]" />
       </div>

@@ -23,7 +23,7 @@ All copy and every event fact live in `lib/config.ts`. Sections read from it, so
 - **Sponsors.** Add `{ name, href }` to `sponsors.title | gold | silver | community`. `sponsors.slots` controls how many empty "Seat open" chairs show per tier.
 - **Speakers.** Fill `speaker` and `title` in `workshops`. Until then the plaque reads "Seat open".
 - **Co-hosts.** Add names to `coHosts` only once they are confirmed.
-- **Open call.** `reach` holds the ExeaLabs band after the hero: heading, body and the glitch line. Its City row reads `venueCity`.
+- **Open call.** `reach` holds the ExeaLabs band after the hero: heading and body. Its City row reads `venueCity`.
 - **Contact.** Setting `sponsorEmail` turns on the "Take a seat at the house" mail link.
 
 Never put an unconfirmed name in the config. The page shows exactly what is there.
@@ -50,13 +50,10 @@ With the dev server running on port 3100:
 node scripts/shots.mjs screenshots http://localhost:3100 375,768,1024,1440,1920 full
 ```
 
-The script writes one PNG per width and prints any horizontal overflow and console errors. With `full`, it wheels through the page before capturing, so every scroll-triggered entrance has played.
+The script writes one PNG per width and prints any horizontal overflow and console errors. With `full`, it wheels through the page before capturing.
 
-## Hidden things
-- Four aces are hidden on the page. Finding all four opens "You've got the nuts".
-- The Konami code, or a triple-click on the logo, makes it rain chips.
-- Sound is off by default. Toggle it in the nav.
-- Every effect has a still version under `prefers-reduced-motion`.
+## Motion
+Kept small on purpose. The hero fades in, and its table deals hands to eight bot laptops whose screens show each decision. A dithered light (`components/motion/Dither.tsx`) sways slowly behind the hero, Reach, Why poker and Apply; it draws at 20fps on a tiny canvas. The bench deals one hand at a time. Everything stops when it scrolls out of view, and all of it is under `prefers-reduced-motion`.
 
 ## Still TBA
 These are undecided, so the site says TBA rather than guessing:

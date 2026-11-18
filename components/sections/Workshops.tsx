@@ -1,21 +1,9 @@
-"use client";
-import { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
 import { config } from "@/lib/config";
 
 /** Talks and workshops. Until speakers are confirmed every chair reads "Seat open". */
 export function Workshops() {
-  const ref = useRef<HTMLElement>(null);
-  useGSAP(
-    () => {
-      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      gsap.from(".ws-plaque", { rotationX: -90, transformOrigin: "50% 0%", duration: 0.6, ease: "back.out(1.4)", stagger: 0.09, scrollTrigger: { trigger: ".ws-list", start: "top 80%", once: true } });
-    },
-    { scope: ref },
-  );
-
   return (
-    <section ref={ref} id="talks" aria-labelledby="talks-title" className="relative px-5 py-24 md:px-10 md:py-28">
+    <section id="talks" aria-labelledby="talks-title" className="relative px-5 py-24 md:px-10 md:py-28">
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
         <div>
           <p className="label text-text-3">Talks and workshops</p>

@@ -59,7 +59,6 @@ export const config = {
     label: "ExeaLabs · Open call",
     heading: "Built anywhere. Played in one room.",
     body: "Applications are open to undergrads and researchers wherever they are. It's one day in Pleasanton, about 150 seats in teams of up to three, and every application is reviewed.",
-    glitch: "Shuffle up and deal.",
   },
 
   manifesto: {
@@ -166,15 +165,7 @@ export const config = {
     deadline: null as string | null, // TBA
   },
 
-  /** Hidden-aces puzzle. Shown when someone finds all four. */
-  puzzle: {
-    title: "You've got the nuts.",
-    message: "Four of four. Screenshot this. What it's worth gets announced closer to the day.", // TBA: real bonus
-  },
-
   safety: "Virtual chips only. No real-money gambling. This is a game-theory and AI competition.",
-
-  marquee: ["Expected value", "Nash equilibrium", "Monte Carlo", "Counterfactual regret", "Pot odds", "Bluff frequency", "Exploit", "All in"],
 };
 
 export type Config = typeof config;

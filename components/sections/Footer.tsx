@@ -1,5 +1,4 @@
 import { config } from "@/lib/config";
-import { AcesCount, HiddenAce } from "@/components/ui/Aces";
 
 export function Footer() {
   return (
@@ -35,15 +34,9 @@ export function Footer() {
           </nav>
         </div>
 
-        {/* Watermark drawn as generated content: it is ornament, not text, so contrast checkers leave it alone. */}
-        <div aria-hidden className="display mt-20 text-center text-[clamp(5rem,20vw,18rem)] leading-[0.8] text-ivory/[0.045] select-none before:content-['ALL_'] after:italic after:content-['IN']" />
-
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-hair-soft pt-6 font-mono text-[11px] tracking-[0.12em] text-text-3 uppercase">
+        <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-hair-soft pt-6 font-mono text-[11px] tracking-[0.12em] text-text-3 uppercase">
           <span>© {config.organizer}</span>
-          <span className="flex items-center gap-3">
-            Aces found <AcesCount />
-            <HiddenAce suit="clubs" rotate={-6} />
-          </span>
+          <span>Virtual chips only</span>
         </div>
       </div>
     </footer>

@@ -111,23 +111,6 @@ dd {
   border-radius: 2px;
 }
 
-/* Film grain + vignette over everything (pointer-transparent). */
-body::before,
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 90;
-}
-body::before {
-  background-image: var(--noise);
-  opacity: 0.03;
-}
-body::after {
-  background: radial-gradient(120% 90% at 50% 40%, transparent 60%, rgb(0 0 0 / 0.28) 100%);
-}
-
 /* Component classes sit in a layer so Tailwind utilities can override them. */
 @layer comp {
   /* ---------- Type ---------- */
@@ -367,54 +350,6 @@ body::after {
       inset 0 -2px 3px rgb(0 0 0 / 0.35);
   }
 
-  /* ---------- Motion helpers ---------- */
-  .split-line {
-    display: block;
-    overflow: clip;
-    padding-bottom: 0.08em;
-    margin-bottom: -0.08em;
-  }
-  [data-reveal] {
-    will-change: transform, opacity;
-  }
-}
-
-/* Preloader is hidden for returning visitors before React even boots. */
-html[data-dealt] .preloader {
-  display: none;
-}
-
-/* Custom cursor hides the native one only once it's running. */
-html.has-cursor,
-html.has-cursor a,
-html.has-cursor button,
-html.has-cursor summary,
-html.has-cursor label {
-  cursor: none;
-}
-html.has-cursor input,
-html.has-cursor textarea,
-html.has-cursor select {
-  cursor: text;
-}
-
-/* Spotlight glow on dark cards, positioned by the cursor. */
-.spot {
-  --mx: 50%;
-  --my: 50%;
-}
-.spot::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background: radial-gradient(260px circle at var(--mx) var(--my), color-mix(in oklab, var(--gold) 13%, transparent), transparent 70%);
-  opacity: 0;
-  transition: opacity 0.4s var(--ease-out);
-}
-.spot:hover::before {
-  opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -426,17 +361,8 @@ html.has-cursor select {
     transition-duration: 0.12s !important;
     scroll-behavior: auto !important;
   }
-  .preloader {
-    display: none;
-  }
 }
 
-@media (prefers-reduced-transparency: reduce) {
-  .nav-glass {
-    backdrop-filter: none !important;
-    background: var(--felt-950) !important;
-  }
-}
 @media (prefers-contrast: more) {
   :root {
     --text-2: var(--ivory);
@@ -445,11 +371,6 @@ html.has-cursor select {
   }
 }
 
-@keyframes eq {
-  to {
-    transform: scaleY(1);
-  }
-}
 section[id] {
   scroll-margin-top: 72px;
 }
@@ -475,116 +396,71 @@ section[id] {
     inset 0 14px 40px rgb(0 0 0 / 0.55),
     inset 0 0 120px rgb(0 0 0 / 0.45);
 }
+/* bot laptops */
+.t-kb {
+  background:
+    repeating-linear-gradient(0deg, transparent 0 5px, #161a18 5px 7px) 8px 7px / calc(100% - 16px) 28px no-repeat,
+    repeating-linear-gradient(90deg, rgb(255 255 255 / 0.09) 0 6px, transparent 6px 8px) 8px 7px / calc(100% - 16px) 28px no-repeat,
+    linear-gradient(#1d211f, #121513);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.08), 0 6px 12px rgb(0 0 0 / 0.55);
+}
+.t-lid {
+  background: linear-gradient(160deg, #2a2f2c, #121513);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.06);
+}
+.t-led {
+  background: var(--gold);
+  opacity: 0.35;
+  transition: opacity 0.3s, box-shadow 0.3s;
+}
+.t-scr {
+  background: linear-gradient(180deg, #0a1a14, #06100c);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--gold) 35%, transparent), inset 0 0 0 3px #0b0d0c;
+  transition: box-shadow 0.3s;
+}
+.t-dot {
+  background: rgb(243 236 218 / 0.25);
+}
 .t-seat {
-  transition: border-color 0.3s var(--ease-out), box-shadow 0.4s var(--ease-out), color 0.3s;
+  cursor: default;
 }
-.t-seat:hover {
-  border-color: var(--gold);
-  color: var(--ivory);
-}
-.t-seat[data-think] .t-dot {
-  background: var(--gold-bright);
-  box-shadow: 0 0 8px var(--gold);
-}
-.t-seat[data-win] {
-  border-color: var(--gold-bright);
-  color: var(--gold-bright);
-  box-shadow: 0 0 0 1px var(--gold), 0 0 26px color-mix(in oklab, var(--gold) 60%, transparent);
-}
+.t-seat[data-think] .t-dot,
 .t-seat[data-win] .t-dot {
   background: var(--gold-bright);
+  box-shadow: 0 0 6px var(--gold);
 }
-.t-seat[data-allin] {
-  border-color: var(--chip-red);
-  color: var(--ivory);
+.t-seat[data-think] .t-led,
+.t-seat[data-win] .t-led {
+  opacity: 1;
+  box-shadow: 0 0 10px var(--gold-bright);
+}
+.t-seat[data-think] .t-scr {
+  box-shadow: inset 0 0 0 1px var(--gold), inset 0 0 0 3px #0b0d0c, 0 0 18px color-mix(in oklab, var(--gold) 45%, transparent);
+}
+.t-seat[data-win] .t-scr {
+  box-shadow: inset 0 0 0 1px var(--gold-bright), inset 0 0 0 3px #0b0d0c, 0 0 26px color-mix(in oklab, var(--gold) 70%, transparent);
+}
+.t-seat[data-allin] .t-led {
+  background: var(--chip-red);
+  opacity: 1;
 }
 .t-tip[data-on] {
   opacity: 1;
 }
 
-/* headline glint, swept once on entrance */
-.glint {
-  background: linear-gradient(105deg, var(--ivory) 40%, var(--gold-bright) 48%, #fff8dc 50%, var(--gold-bright) 52%, var(--ivory) 60%) 0 0 / 250% 100%;
-  background-position: 100% 0;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* dust motes in the spotlight beam */
-.dust {
-  background-image:
-    radial-gradient(1px 1px at 12% 30%, rgb(242 217 138 / 0.5), transparent),
-    radial-gradient(1px 1px at 37% 72%, rgb(242 217 138 / 0.35), transparent),
-    radial-gradient(1.5px 1.5px at 64% 18%, rgb(243 236 218 / 0.4), transparent),
-    radial-gradient(1px 1px at 82% 55%, rgb(242 217 138 / 0.45), transparent),
-    radial-gradient(1px 1px at 55% 44%, rgb(243 236 218 / 0.3), transparent),
-    radial-gradient(1.5px 1.5px at 91% 82%, rgb(242 217 138 / 0.3), transparent);
-  background-size: 340px 300px;
-  mask-image: radial-gradient(50% 70% at 74% 30%, #000, transparent 75%);
-  opacity: 0.8;
-}
-
-
-/* ---------- Glitch cut (Reach → Manifesto) ---------- */
-@layer comp {
-  .glitch {
-    position: relative;
+/* entrances: one short fade-up, staggered with --i (Hero.tsx) */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
-  .glitch::before,
-  .glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    inset: 0;
-    margin-inline: auto;
-    max-width: inherit;
+  .rise {
+    animation: rise 0.8s var(--ease-out) both;
+    animation-delay: calc(var(--i, 0) * 70ms);
+  }
+}
+@keyframes rise {
+  from {
     opacity: 0;
-    pointer-events: none;
-  }
-  .glitch.is-on {
-    animation: gl-main 0.45s steps(1) both;
-  }
-  .glitch.is-on::before {
-    color: var(--chip-red);
-    animation: gl-a 0.45s steps(1) both;
-  }
-  .glitch.is-on::after {
-    color: var(--chip-blue);
-    animation: gl-b 0.45s steps(1) both;
-  }
-}
-@keyframes gl-main {
-  0% { opacity: 0; }
-  6% { opacity: 1; transform: translateX(3px) skewX(4deg); }
-  14% { opacity: 0.6; transform: translateX(-2px); }
-  22% { opacity: 1; transform: none; }
-  48% { transform: translateX(3px); }
-  54%, 100% { transform: none; opacity: 1; }
-}
-@keyframes gl-a {
-  0% { opacity: 0.55; clip-path: inset(8% 0 72% 0); transform: translateX(-4px); }
-  18% { clip-path: inset(58% 0 12% 0); transform: translateX(4px); }
-  36% { clip-path: inset(30% 0 48% 0); transform: translateX(-2px); }
-  54% { clip-path: inset(80% 0 4% 0); transform: translateX(2px); }
-  72% { clip-path: inset(0 0 88% 0); transform: translateX(-1px); }
-  90%, 100% { opacity: 0; }
-}
-@keyframes gl-b {
-  0% { opacity: 0.55; clip-path: inset(66% 0 10% 0); transform: translateX(4px); }
-  20% { clip-path: inset(12% 0 70% 0); transform: translateX(-3px); }
-  40% { clip-path: inset(44% 0 36% 0); transform: translateX(2px); }
-  62% { clip-path: inset(4% 0 82% 0); transform: translateX(-1px); }
-  84%, 100% { opacity: 0; }
-}
-
-/* ---------- Manifesto: the frame sticks while the section scrolls past (Manifesto.tsx); text arrives in stop-motion ---------- */
-@media (prefers-reduced-motion: no-preference) and (min-width: 1024px) and (min-height: 640px) {
-  .mf {
-    height: 200svh;
-  }
-  .mf-stick {
-    position: sticky;
-    top: 0;
-    height: 100svh;
+    translate: 0 14px;
   }
 }

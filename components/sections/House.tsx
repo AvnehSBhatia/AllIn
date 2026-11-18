@@ -1,6 +1,3 @@
-"use client";
-import { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
 import { config, type Tier } from "@/lib/config";
 
 const TIERS: Tier[] = ["title", "gold", "silver", "community"];
@@ -19,15 +16,7 @@ const pos = seats.map((_, i) => {
 
 /** Sponsors as a top-down seating chart. Empty chairs say so. */
 export function House() {
-  const ref = useRef<HTMLElement>(null);
   const email = config.sponsorEmail;
-  useGSAP(
-    () => {
-      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      gsap.from(".hs-seat", { scale: 0.6, opacity: 0, duration: 0.5, ease: "back.out(2)", stagger: { each: 0.05, from: "start" }, scrollTrigger: { trigger: ".hs-table", start: "top 75%", once: true } });
-    },
-    { scope: ref },
-  );
 
   const plaque = (x: (typeof seats)[number], i: number) => {
     const body = (
@@ -49,7 +38,7 @@ export function House() {
   };
 
   return (
-    <section ref={ref} id="sponsors" aria-labelledby="sponsors-title" className="relative overflow-x-clip px-5 py-24 md:px-10 md:py-36">
+    <section id="sponsors" aria-labelledby="sponsors-title" className="relative overflow-x-clip px-5 py-24 md:px-10 md:py-36">
       <div className="mx-auto max-w-[1440px]">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div>

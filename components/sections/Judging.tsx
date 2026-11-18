@@ -1,34 +1,11 @@
-"use client";
-import { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
 import { config } from "@/lib/config";
 import { PlayingCard } from "@/components/ui/PlayingCard";
 
 /** Criteria as a hand-rankings card: each row deals its five cards as it arrives. */
 export function Judging() {
-  const ref = useRef<HTMLElement>(null);
   const j = config.judging;
-  useGSAP(
-    () => {
-      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-      gsap.utils.toArray<HTMLElement>(".jd-row", ref.current).forEach((row) => {
-        gsap.from(row.querySelectorAll(".jd-card"), {
-          x: -60,
-          y: -30,
-          rotate: -20,
-          opacity: 0,
-          duration: 0.45,
-          ease: "power3.out",
-          stagger: 0.05,
-          scrollTrigger: { trigger: row, start: "top 78%", once: true },
-        });
-      });
-    },
-    { scope: ref },
-  );
-
   return (
-    <section ref={ref} id="judging" aria-labelledby="judging-title" className="relative px-5 py-24 md:px-10 md:py-36">
+    <section id="judging" aria-labelledby="judging-title" className="relative px-5 py-24 md:px-10 md:py-36">
       <div className="mx-auto max-w-[1440px]">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end">
           <div>

@@ -2,12 +2,6 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Geist, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import { config } from "@/lib/config";
-import { Preloader } from "@/components/ui/Preloader";
-import { SmoothScroll } from "@/components/motion/SmoothScroll";
-import { Cursor } from "@/components/ui/Cursor";
-import { ChipRain } from "@/components/ui/ChipRain";
-import { Extras } from "@/components/ui/Extras";
-import { AcesOverlay } from "@/components/ui/Aces";
 import "./globals.css";
 
 const display = Instrument_Serif({ variable: "--font-instrument", weight: "400", style: ["normal", "italic"], subsets: ["latin"] });
@@ -40,29 +34,16 @@ const jsonLd = {
   url: config.url,
 };
 
-// Runs before paint: skip the preloader for returning visitors and reduced-motion users.
-const boot = `try{if(sessionStorage.getItem("allin-dealt")||matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.dataset.dealt="1"}catch(e){}`;
-
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: boot }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-        <noscript>
-          <style>{`.preloader{display:none}.h-in{visibility:visible!important}`}</style>
-        </noscript>
       </head>
       <body>
         <a href="#main" className="btn btn-gold fixed top-3 left-3 z-[99] -translate-y-24 focus:translate-y-0">
           Skip to content
         </a>
-        <Preloader />
-        <SmoothScroll />
-        <Cursor />
-        <ChipRain />
-        <Extras />
-        <AcesOverlay />
         {children}
       </body>
     </html>

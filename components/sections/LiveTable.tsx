@@ -4,7 +4,6 @@ import { Pause, Play, RotateCcw, StepForward } from "lucide-react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { equity, handName, label, parse, score, shuffled } from "@/lib/poker";
 import { PlayingCard } from "@/components/ui/PlayingCard";
-import { flip } from "@/lib/sound";
 
 const STREETS = ["Pre-flop", "Flop", "Turn", "River"] as const;
 const SHOWN = [0, 3, 4, 5];
@@ -39,7 +38,6 @@ export function LiveTable() {
   const done = street === 3;
 
   const next = () => {
-    flip();
     if (done) {
       setHand(deal());
       setStreet(0);

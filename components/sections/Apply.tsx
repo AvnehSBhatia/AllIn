@@ -4,9 +4,7 @@ import { z } from "zod";
 import { ArrowUpRight } from "lucide-react";
 import { config } from "@/lib/config";
 import { applySchema } from "@/lib/apply";
-import { clink } from "@/lib/sound";
-import { SplitHeading } from "@/components/motion/SplitHeading";
-import { Chip } from "@/components/ui/Chip";
+import { Dither } from "@/components/motion/Dither";
 
 type Errors = Partial<Record<string, string[]>>;
 const field = "mt-2 w-full rounded-lg border border-hair-soft bg-ink/40 px-4 py-3 text-ivory placeholder:text-text-3 transition-colors focus:border-gold focus:outline-none aria-[invalid=true]:border-chip-red";
@@ -32,7 +30,6 @@ export function Apply() {
     try {
       const res = await fetch("/api/apply", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(parsed.data) });
       if (!res.ok) throw new Error(String(res.status));
-      clink();
       setState("done");
     } catch {
       setState("failed");
@@ -49,15 +46,15 @@ export function Apply() {
 
   return (
     <section id="apply" aria-labelledby="apply-title" className="relative overflow-clip px-5 py-24 md:px-10 md:py-36">
-      <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-24">
+      <Dither seed={3} className="absolute inset-0 h-full w-full opacity-45 [mask-image:radial-gradient(60%_70%_at_20%_60%,#000,transparent)]" />
+      <div className="relative mx-auto grid max-w-[1440px] grid-cols-1 gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-24">
         <div className="relative">
           <p className="label text-text-3">Apply</p>
-          <SplitHeading id="apply-title" by="chars" className="h2 mt-5 text-[clamp(2.8rem,6vw,5.25rem)]">
+          <h2 id="apply-title" className="h2 mt-5 text-[clamp(2.8rem,6vw,5.25rem)]">
             {a.heading}
-          </SplitHeading>
+          </h2>
           <p className="lede mt-6">{a.body}</p>
           <p className="mt-8 font-mono text-xs tracking-[0.14em] text-text-3 uppercase">Deadline · {a.deadline ?? "TBA"}</p>
-          <Chip color="black" className="pointer-events-none absolute -bottom-10 left-[55%] hidden w-40 rotate-12 opacity-80 lg:block" />
         </div>
 
         {config.applyUrl ? (

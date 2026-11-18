@@ -1,6 +1,4 @@
-import { config } from "@/lib/config";
 import { Nav } from "@/components/ui/Nav";
-import { Marquee } from "@/components/motion/Marquee";
 import { Hero } from "@/components/sections/Hero";
 import { Reach } from "@/components/sections/Reach";
 import { Manifesto } from "@/components/sections/Manifesto";
@@ -21,7 +19,6 @@ export default function Home() {
       <Nav />
       <main id="main">
         <Hero />
-        <Marquee items={config.marquee} />
         <Reach />
         <Manifesto />
         <Classified />

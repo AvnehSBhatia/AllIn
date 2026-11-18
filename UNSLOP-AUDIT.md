@@ -41,7 +41,7 @@ Method:
 | Every section fading up 40px on the same ease | Each section has its own verb: cards dealt (`Judging.tsx:15`), chips dropped with bounce (`Prizes.tsx:20`), plaques flipped on X (`Workshops.tsx:12`), a timeline drawn by scroll (`Format.tsx:70`) |
 | Reduced motion meaning "nothing" | `app/globals.css:430`: every effect has a still state that looks finished, and the hero still shows a full hand on the table |
 
-Every one-shot motion is 1.2s or less; the preloader (2.2s or less, once per session) is the only exception. The marquee and dust are ambient loops, not transitions.
+Every one-shot motion is 1.2s or less. The dither sway is the only ambient loop.
 
 ## Craft details
 - "Seat open" empty states: `House.tsx:36`, `Workshops.tsx:32`.
@@ -53,7 +53,7 @@ Every one-shot motion is 1.2s or less; the preloader (2.2s or less, once per ses
 
 ## Three bold upgrades
 1. **Prizes**: physical chip stacks that drop onto felt. Stack height shows rank without inventing a prize amount.
-2. **Reach**: after the hero, a dithered bit-gradient band (`components/motion/Dither.tsx`), then a dot globe you can throw (`components/reach/Globe.tsx`), drawn on a 2D canvas from a 2° land mask, with no WebGL. It cuts to a one-shot RGB-split glitch line.
+2. **Reach**: after the hero, a dithered bit-gradient band (`components/motion/Dither.tsx`) under the heading, then the body and facts.
 3. **The House**: a seating chart. With no sponsors confirmed, it shows empty chairs rather than fake logos.
 
 ## Removed for density
@@ -69,3 +69,6 @@ Every one-shot motion is 1.2s or less; the preloader (2.2s or less, once per ses
 ## Softened
 
 Display type maxes cut 20 to 35% with looser leading (hero, `.h2`, Reach, Apply, footer watermark). Grain, vignette, card shadows, dither, globe dots and pings, and the glitch offsets all turned down.
+
+## Restraint pass
+Removed: preloader, custom cursor, chip rain, hidden aces, sound, marquee, globe, glitch, letter-split headings, scroll-scrubbed entrances, cursor tilt, grain and vignette overlays. Kept: one CSS fade-up in the hero, the dealing table (seats are now bot laptops), the bench, and a swaying dither in four sections.
