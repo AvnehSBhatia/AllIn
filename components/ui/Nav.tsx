@@ -51,7 +51,7 @@ export function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div
-        className={`nav-glass transition-[background-color,backdrop-filter] duration-500 ${scrolled || open ? "bg-felt-950/75 backdrop-blur-xl backdrop-saturate-150" : ""}`}
+        className={`nav-glass transition-[background-color,backdrop-filter] duration-500 ${scrolled || open ? "bg-felt-950/88 backdrop-blur-md" : ""}`}
         style={{ maskImage: scrolled && !open ? "linear-gradient(#000 80%, transparent)" : undefined }}
       >
         <nav aria-label="Main" className="mx-auto flex h-16 max-w-[1680px] items-center gap-4 px-4 md:px-8">

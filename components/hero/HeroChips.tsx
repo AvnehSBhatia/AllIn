@@ -4,8 +4,8 @@ import { gsap } from "@/lib/gsap";
 import { CHIP_HEX, chipSprites, drawChip, type ChipSprites } from "@/lib/chips";
 
 /**
- * Flying chips in three depth layers. Depth of field is a CSS blur on the near and far canvases,
- * which the compositor handles; the middle layer stays sharp and is the only one the cursor pushes.
+ * Flying chips in three depth layers. Depth of field comes from drawing the near and far canvases at low resolution
+ * and letting the upscale soften them; the middle layer stays sharp and is the only one the cursor pushes.
  */
 type Chip = { hx: number; hy: number; r: number; tilt: number; roll: number; spin: number; vs: number; ph: number; sp: number; ox: number; oy: number; vx: number; vy: number; s: ChipSprites };
 type Layer = { el: HTMLCanvasElement; ctx: CanvasRenderingContext2D; chips: Chip[]; depth: number; repel: boolean };
@@ -45,7 +45,7 @@ export function HeroChips({ playing, reduced }: { playing: boolean; reduced: boo
       const box = host.getBoundingClientRect();
       w = box.width;
       h = box.height;
-      const dpr = Math.min(2, devicePixelRatio || 1);
+      const sharp = Math.min(1.5, devicePixelRatio || 1);
       const set = w < 768 ? MOBILE : DESK;
       const unit = Math.min(w, 1400) / 1400;
       const spec = [
@@ -55,6 +55,8 @@ export function HeroChips({ playing, reduced }: { playing: boolean; reduced: boo
       ];
       layers = spec.map((sp, li) => {
         const el = canvases[li];
+        // ponytail: far/near layers render at 1/3 and 1/5 scale; the browser's upscale is the depth-of-field blur
+        const dpr = sp.repel ? sharp : sp.depth < 1 ? 0.33 : 0.2;
         el.width = Math.round(w * dpr);
         el.height = Math.round(h * dpr);
         const ctx = el.getContext("2d")!;
@@ -129,7 +131,8 @@ export function HeroChips({ playing, reduced }: { playing: boolean; reduced: boo
     }
 
     const tick = (_: number, dms: number) => {
-      if (play.current) frame(Math.min(0.05, dms / 1000));
+      // ponytail: past one hero-height the chips are off screen, so stop drawing them
+      if (play.current && scrollY < h) frame(Math.min(0.05, dms / 1000));
     };
     gsap.ticker.add(tick);
     const ro = new ResizeObserver(build);
@@ -152,9 +155,9 @@ export function HeroChips({ playing, reduced }: { playing: boolean; reduced: boo
 
   return (
     <div ref={wrap} className="pointer-events-none absolute inset-0" aria-hidden>
-      <canvas className="absolute inset-0 h-full w-full opacity-70 blur-[2px]" />
+      <canvas className="absolute inset-0 h-full w-full opacity-70" />
       <canvas className="absolute inset-0 z-[3] h-full w-full" />
-      <canvas className="absolute inset-0 z-[6] h-full w-full blur-[6px]" />
+      <canvas className="absolute inset-0 z-[6] h-full w-full" />
     </div>
   );
 }

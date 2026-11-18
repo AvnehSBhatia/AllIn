@@ -20,9 +20,9 @@ export function Workshops() {
         <div>
           <p className="label text-text-3">Talks and workshops</p>
           <h2 id="talks-title" className="h3 mt-5 max-w-[20ch] text-[clamp(2rem,3.6vw,3.2rem)]">
-            Between hands, people who do this for a living will talk shop.
+            Between hands, people who do this for a living talk shop.
           </h2>
-          <p className="mt-5 max-w-[40ch] text-text-2">Research talks and hands-on workshops run through the day. Speakers are being confirmed. We list names only once they say yes.</p>
+          <p className="mt-5 max-w-[40ch] text-text-2">Two workshops run in the afternoon while the leaderboard keeps going. Speakers are being confirmed. We list names only once they say yes.</p>
         </div>
 
         <ul className="ws-list grid gap-3 [perspective:900px]">

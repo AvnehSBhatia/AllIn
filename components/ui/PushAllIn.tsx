@@ -64,7 +64,6 @@ export function PushAllIn({ children = "Push all-in", className = "" }: { childr
     <a
       ref={ref}
       href={external ? config.applyUrl : "#apply"}
-      data-lenis-prevent-anchor
       className={`btn btn-gold group ${className}`}
       onClick={(e) => {
         if (external) return;

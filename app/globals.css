@@ -64,16 +64,7 @@ html {
   -webkit-text-size-adjust: 100%;
   scrollbar-color: var(--felt-600) var(--felt-950);
   scrollbar-width: thin;
-}
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-stopped {
-  overflow: clip;
+  scroll-padding-top: 72px;
 }
 
 body {
@@ -131,8 +122,7 @@ body::after {
 }
 body::before {
   background-image: var(--noise);
-  opacity: 0.045;
-  mix-blend-mode: overlay;
+  opacity: 0.03;
 }
 body::after {
   background: radial-gradient(120% 90% at 50% 40%, transparent 60%, rgb(0 0 0 / 0.28) 100%);
@@ -532,14 +522,9 @@ section[id] {
     radial-gradient(1.5px 1.5px at 91% 82%, rgb(242 217 138 / 0.3), transparent);
   background-size: 340px 300px;
   mask-image: radial-gradient(50% 70% at 74% 30%, #000, transparent 75%);
-  animation: dust 38s linear infinite;
   opacity: 0.8;
 }
-@keyframes dust {
-  to {
-    background-position: 340px -300px;
-  }
-}
+
 
 /* ---------- Glitch cut (Reach → Manifesto) ---------- */
 @layer comp {

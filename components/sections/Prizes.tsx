@@ -5,8 +5,8 @@ import { config } from "@/lib/config";
 import { CHIP_COLORS, Chip } from "@/components/ui/Chip";
 import { HiddenAce } from "@/components/ui/Aces";
 
-// Stack heights are ranking, not value. The pool itself is TBA.
-const HEIGHT = [15, 9, 7, 5];
+// Stack heights follow the prize amounts.
+const HEIGHT = [16, 7, 7, 4];
 
 /** Four prizes as four stacks of chips that drop onto the felt with some weight. */
 export function Prizes() {
@@ -51,8 +51,9 @@ export function Prizes() {
                   <Stack color={it.chip} n={HEIGHT[i]} wide={i === 0} />
                 </div>
                 <div className="mt-6 border-t border-hair-soft pt-4">
-                  <p className="label text-text-3">{i === 0 ? "First place" : "Award"}</p>
-                  <h3 className={`mt-2 font-display leading-[1.02] text-ivory ${i === 0 ? "text-[clamp(2rem,3.4vw,3rem)]" : "text-[1.6rem]"}`}>{it.title}</h3>
+                  <p className="label text-text-3">{it.label}</p>
+                  <p className={`mt-2 font-display leading-none text-gold-bright ${i === 0 ? "text-[clamp(2.4rem,4vw,3.4rem)]" : "text-[2rem]"}`}>{it.amount}</p>
+                  <h3 className={`mt-2 font-display leading-[1.05] text-ivory ${i === 0 ? "text-[clamp(1.6rem,2.4vw,2.1rem)]" : "text-[1.35rem]"}`}>{it.title}</h3>
                   <p className="mt-2 text-sm text-text-2">{it.body}</p>
                 </div>
               </li>

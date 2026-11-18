@@ -232,7 +232,7 @@ export const HeroTable = forwardRef<TableHandle, { playing: boolean; reduced: bo
         <rect x="130" y="130" width="840" height="360" rx="180" fill="none" stroke="var(--gold)" strokeOpacity=".18" strokeWidth="1" />
         <text fill="var(--gold)" fillOpacity=".6" style={{ fontFamily: "var(--font-mono)", fontSize: 13, letterSpacing: "0.32em" }}>
           <textPath href="#t-arc" startOffset="50%" textAnchor="middle">
-            EXEALABS · RESEARCH HACKATHON
+            EXEALABS · ALGORITHMIC TOURNAMENT
           </textPath>
         </text>
         <g transform="translate(250 312)" fill="var(--gold)" fillOpacity=".55">

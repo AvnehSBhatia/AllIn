@@ -20,9 +20,9 @@ const EDGE = [
 ] as const;
 
 const FACTS = [
-  ["When", config.date ? new Date(config.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : config.dateWindow],
-  ["Length", config.durationLabel],
-  ["Format", config.format],
+  ["When", config.date ? new Date(config.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "America/Los_Angeles" }) : config.dateWindow],
+  ["Where", config.venueCity ?? "TBA"],
+  ["Teams", `Up to ${config.teamSize}`],
   ["Seats", `~${config.capacity}`],
 ] as const;
 
@@ -137,7 +137,7 @@ export function Hero() {
           <p className="h-fade h-in invisible flex items-center gap-3">
             <span className="text-[1.05rem] font-semibold tracking-[-0.01em] text-ivory">{config.organizer}</span>
             <span aria-hidden className="h-4 w-px bg-hair" />
-            <span className="label text-text-2">The Research Hackathon</span>
+            <span className="label text-text-2">The Algorithmic Tournament</span>
           </p>
           <h1 id="hero-title" className="h-title mt-5 font-display text-[clamp(4.4rem,16vw,6.75rem)] leading-[0.88] tracking-[-0.03em] lg:text-[clamp(6rem,9vw,9rem)]">
             <span className="h-word h-in invisible block pb-[0.06em]">

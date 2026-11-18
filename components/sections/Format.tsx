@@ -6,16 +6,18 @@ import { SplitHeading } from "@/components/motion/SplitHeading";
 
 const RULES: [string, string, string?][] = [
   ["Length", config.durationLabel, "Kickoff to awards, same day"],
-  ["Format", config.format, "Hybrid not decided"],
+  ["Format", config.format, "One day, no overnight"],
   ["Seats", `About ${config.capacity}`, "Selective. Applications are read"],
   ["Who", "Undergrads and researchers"],
-  ["When", config.date ? new Date(config.date).toLocaleDateString("en-US", { month: "long", day: "numeric" }) : config.dateWindow, config.date ? undefined : "Date TBA"],
+  ["When", config.date ? new Date(config.date).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", timeZone: "America/Los_Angeles" }) : config.dateWindow, config.date ? "8:30 AM to 8:30 PM" : "Date TBA"],
   ["Where", config.venue ?? "TBA", config.venueCity ?? undefined],
-  ["Team size", "TBA"],
+  ["Team size", `Up to ${config.teamSize}`, "About 50 teams"],
+  ["Hosts", [config.organizer, ...config.coHosts].join(" × ")],
   ["Languages", "TBA", "Announced with the engine API"],
   ["Cost", "TBA"],
   ["Food", config.food],
-  ["Talks", "Workshops and research talks through the day"],
+  ["Talks", "Two workshops in the afternoon"],
+  ["Winner", "Live leaderboard, then a playoff bracket"],
   ["Chips", "Virtual. Always"],
 ];
 
@@ -82,7 +84,7 @@ export function Streets() {
         <h2 id="schedule-title" className="h2 mt-5 max-w-[14ch]">
           The day plays out like a hand.
         </h2>
-        <p className="mt-6 font-mono text-xs tracking-[0.14em] text-text-3 uppercase">Times TBA</p>
+        <p className="mt-6 font-mono text-xs tracking-[0.14em] text-text-3 uppercase">Saturday, January 30 · Pleasanton, CA</p>
 
         <ol className="st-list relative mt-16 md:ml-[18%]">
           <span aria-hidden className="st-line absolute top-2 bottom-2 left-[7px] w-px origin-top bg-gold" />
@@ -110,6 +112,18 @@ export function Streets() {
             </li>
           ))}
         </ol>
+
+        <div className="mt-20 md:ml-[18%]">
+          <h3 className="label text-text-3">Run of show</h3>
+          <dl className="mt-4 grid border-t border-hair-soft sm:grid-cols-2 sm:gap-x-12">
+            {config.schedule.map(([t, what]) => (
+              <div key={t + what} className="grid grid-cols-[6.5rem_1fr] items-baseline border-b border-hair-soft py-3">
+                <dt className="font-mono text-[13px] text-gold-bright">{t}</dt>
+                <dd className="text-ivory">{what}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </div>
     </section>
   );

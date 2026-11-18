@@ -62,8 +62,13 @@ export function Dither({ still = false, className = "" }: { still?: boolean; cla
       draw(0);
     };
 
+    let lastDraw = 0;
     const loop = (now: number) => {
-      draw(now / 1000);
+      // ponytail: 20fps, the stepped look hides it and it costs a third
+      if (now - lastDraw > 48) {
+        lastDraw = now;
+        draw(now / 1000);
+      }
       raf = visible ? requestAnimationFrame(loop) : 0;
     };
     const kick = () => {

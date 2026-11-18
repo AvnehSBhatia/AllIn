@@ -1,6 +1,6 @@
 # ALL IN
 
-The site for ALL IN, The Research Hackathon by ExeaLabs: a one-day AI poker-bot algorithm competition.
+The site for ALL IN, The Algorithmic Tournament by ExeaLabs (co-hosted with YRI): a one-day AI poker-bot competition, January 30, 2027, at Zoho HQ in Pleasanton, CA.
 
 Built with Next.js 16 (App Router), TypeScript in strict mode, Tailwind v4, GSAP (ScrollTrigger, SplitText) and Lenis.
 
@@ -62,7 +62,7 @@ The script writes one PNG per width and prints any horizontal overflow and conso
 These are undecided, so the site says TBA rather than guessing:
 - Exact date (late January or early February) and kickoff time.
 - Venue and city. Whether the event goes hybrid.
-- Team size, allowed languages and cost.
+- Allowed languages, cost and the application deadline.
 - Prize pool. The four award names are proposals.
 - Judging weights.
 - Sponsors, co-hosts, food partner, speakers and session times.
