@@ -23,6 +23,7 @@ All copy and every event fact live in `lib/config.ts`. Sections read from it, so
 - **Sponsors.** Add `{ name, href }` to `sponsors.title | gold | silver | community`. `sponsors.slots` controls how many empty "Seat open" chairs show per tier.
 - **Speakers.** Fill `speaker` and `title` in `workshops`. Until then the plaque reads "Seat open".
 - **Co-hosts.** Add names to `coHosts` only once they are confirmed.
+- **Open call.** `reach` holds the ExeaLabs band after the hero: heading, body and the glitch line. Its City row reads `venueCity`.
 - **Contact.** Setting `sponsorEmail` turns on the "Take a seat at the house" mail link.
 
 Never put an unconfirmed name in the config. The page shows exactly what is there.

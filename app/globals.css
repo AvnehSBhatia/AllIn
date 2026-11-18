@@ -131,11 +131,11 @@ body::after {
 }
 body::before {
   background-image: var(--noise);
-  opacity: 0.07;
+  opacity: 0.045;
   mix-blend-mode: overlay;
 }
 body::after {
-  background: radial-gradient(120% 90% at 50% 40%, transparent 55%, rgb(0 0 0 / 0.45) 100%);
+  background: radial-gradient(120% 90% at 50% 40%, transparent 60%, rgb(0 0 0 / 0.28) 100%);
 }
 
 /* Component classes sit in a layer so Tailwind utilities can override them. */
@@ -144,14 +144,14 @@ body::after {
   .display {
     font-family: var(--font-display);
     font-weight: 400;
-    line-height: 0.86;
-    letter-spacing: -0.035em;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
   }
   .h2 {
     font-family: var(--font-display);
-    font-size: clamp(2.6rem, 6.2vw, 5.75rem);
-    line-height: 0.92;
-    letter-spacing: -0.03em;
+    font-size: clamp(2.3rem, 4.6vw, 4.25rem);
+    line-height: 1;
+    letter-spacing: -0.022em;
   }
   .h3 {
     font-family: var(--font-display);
@@ -538,5 +538,68 @@ section[id] {
 @keyframes dust {
   to {
     background-position: 340px -300px;
+  }
+}
+
+/* ---------- Glitch cut (Reach → Manifesto) ---------- */
+@layer comp {
+  .glitch {
+    position: relative;
+  }
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    margin-inline: auto;
+    max-width: inherit;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .glitch.is-on {
+    animation: gl-main 0.45s steps(1) both;
+  }
+  .glitch.is-on::before {
+    color: var(--chip-red);
+    animation: gl-a 0.45s steps(1) both;
+  }
+  .glitch.is-on::after {
+    color: var(--chip-blue);
+    animation: gl-b 0.45s steps(1) both;
+  }
+}
+@keyframes gl-main {
+  0% { opacity: 0; }
+  6% { opacity: 1; transform: translateX(3px) skewX(4deg); }
+  14% { opacity: 0.6; transform: translateX(-2px); }
+  22% { opacity: 1; transform: none; }
+  48% { transform: translateX(3px); }
+  54%, 100% { transform: none; opacity: 1; }
+}
+@keyframes gl-a {
+  0% { opacity: 0.55; clip-path: inset(8% 0 72% 0); transform: translateX(-4px); }
+  18% { clip-path: inset(58% 0 12% 0); transform: translateX(4px); }
+  36% { clip-path: inset(30% 0 48% 0); transform: translateX(-2px); }
+  54% { clip-path: inset(80% 0 4% 0); transform: translateX(2px); }
+  72% { clip-path: inset(0 0 88% 0); transform: translateX(-1px); }
+  90%, 100% { opacity: 0; }
+}
+@keyframes gl-b {
+  0% { opacity: 0.55; clip-path: inset(66% 0 10% 0); transform: translateX(4px); }
+  20% { clip-path: inset(12% 0 70% 0); transform: translateX(-3px); }
+  40% { clip-path: inset(44% 0 36% 0); transform: translateX(2px); }
+  62% { clip-path: inset(4% 0 82% 0); transform: translateX(-1px); }
+  84%, 100% { opacity: 0; }
+}
+
+/* ---------- Manifesto: the frame sticks while the section scrolls past (Manifesto.tsx); text arrives in stop-motion ---------- */
+@media (prefers-reduced-motion: no-preference) and (min-width: 1024px) and (min-height: 640px) {
+  .mf {
+    height: 200svh;
+  }
+  .mf-stick {
+    position: sticky;
+    top: 0;
+    height: 100svh;
   }
 }

@@ -54,8 +54,22 @@ export const config = {
     { label: "FAQ", href: "#faq" },
   ],
 
-  manifesto:
-    "Chess shows you the whole board. Poker shows you two cards and the way someone bet. Everything else you infer. That gap is the interesting part: acting well on partial information, against an opponent who is trying to mislead you, with a clock running. It is the cleanest testbed we know for decision-making under uncertainty. Plain Hold'em is close enough to solved that you can download a strong bot. So we changed the game. You learn the rules at kickoff. You have one day to build something that plays them well, and then you explain why it works.",
+  reach: {
+    label: "ExeaLabs · Open call",
+    heading: "Built anywhere. Played in one room.",
+    body: "Applications are open to undergrads and researchers wherever they are. The event is one day, in person, with about 150 seats, and every application is reviewed.",
+    glitch: "Shuffle up and deal.",
+  },
+
+  manifesto: {
+    lead: "Chess shows you the whole board. Poker shows you two cards and the way someone bet.",
+    body: [
+      "Everything else you infer. That gap is the interesting part: acting well on partial information, against an opponent who is trying to mislead you, with a clock running.",
+      "Plain Hold'em is close enough to solved that you can download a strong bot.",
+    ],
+    turn: "So we changed the game.",
+    close: "You learn the rules at kickoff. You have one day to build something that plays them well, and then you explain why it works.",
+  },
 
   classified: {
     heading: "The variant is secret until kickoff.",
@@ -107,13 +121,6 @@ export const config = {
     { kind: "Research talk", title: "Announcing soon", speaker: null as string | null, time: "TBA" },
     { kind: "Workshop", title: "Announcing soon", speaker: null as string | null, time: "TBA" },
     { kind: "Research talk", title: "Announcing soon", speaker: null as string | null, time: "TBA" },
-  ],
-
-  stats: [
-    { value: 150, prefix: "~", suffix: "", label: "hackers, selective" },
-    { value: 1, prefix: "", suffix: "", label: "day" },
-    { value: 1, prefix: "", suffix: "", label: "secret game" },
-    { value: Infinity, prefix: "", suffix: "", label: "bluffs" },
   ],
 
   sponsors: {

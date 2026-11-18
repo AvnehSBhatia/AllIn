@@ -21,7 +21,11 @@ export function SmoothScroll() {
 
     // Hold the page still while the preloader deals.
     if (!document.documentElement.dataset.dealt) lenis.stop();
-    const off = onDealt(() => lenis.start());
+    // re-measure once the deal is done: triggers built under the preloader come out misplaced
+    const off = onDealt(() => {
+      lenis.start();
+      requestAnimationFrame(refresh);
+    });
 
     return () => {
       off();

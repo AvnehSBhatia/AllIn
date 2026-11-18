@@ -19,7 +19,7 @@ Method:
 | Three surfaces stacked (page, card, inner card) | Two surfaces only: page felt and the `.felt` panel. Cards were cut wherever a third layer appeared |
 | Gold on every heading, border and icon | Gold is a token (`app/globals.css:12`), used 19 times: CTAs, the prize-pool line, focus rings and hairlines |
 | Component CSS silently overriding Tailwind utilities, so chips ignored their colour and buttons their padding | `app/globals.css:1`: explicit layer order with components in `@layer comp` (`app/globals.css:142`) below utilities |
-| Faint manifesto words at 1.5:1 contrast | `components/sections/Manifesto.tsx:20`: unlit words start at 40%, about 3.2:1, which passes for text this large |
+| Manifesto as a pinned grey wall, lit word by word | `components/sections/Manifesto.tsx:23`: a CSS-sticky frame holds still over a frozen dither while six lines arrive in hard `steps(5)` jumps, stop-motion, with a frame counter. No GSAP pin, so a mis-measured trigger can't leave a blank screen. Small or short screens get the same steps without the sticky frame |
 | Decorative footer wordmark failing contrast checks | `components/sections/Footer.tsx:39`: drawn as generated content, so it reads as ornament rather than text |
 | Static chips over the nav and captions under reduced motion | `components/hero/HeroChips.tsx:13`: home positions stay clear of the nav strip and the caption row |
 | Hero cards overlapping nav links and the "Click the felt" caption | `components/sections/Hero.tsx:17` and `:18` |
@@ -38,8 +38,7 @@ Method:
 
 | Tell | Fixed at |
 | --- | --- |
-| Every section fading up 40px on the same ease | Each section has its own verb: cards dealt (`Judging.tsx:15`), chips dropped with bounce (`Prizes.tsx:20`), plaques flipped on X (`Workshops.tsx:12`), a split-flap rattle (`Stats.tsx:18`), a timeline drawn by scroll (`Format.tsx:70`) |
-| Scramble that could freeze on a wrong digit | `components/sections/Stats.tsx:16`: the real digit lives in `data-v` and is restored on cleanup (`:33`) |
+| Every section fading up 40px on the same ease | Each section has its own verb: cards dealt (`Judging.tsx:15`), chips dropped with bounce (`Prizes.tsx:20`), plaques flipped on X (`Workshops.tsx:12`), a timeline drawn by scroll (`Format.tsx:70`) |
 | Reduced motion meaning "nothing" | `app/globals.css:430`: every effect has a still state that looks finished, and the hero still shows a full hand on the table |
 
 Every one-shot motion is 1.2s or less; the preloader (2.2s or less, once per session) is the only exception. The marquee and dust are ambient loops, not transitions.
@@ -54,11 +53,19 @@ Every one-shot motion is 1.2s or less; the preloader (2.2s or less, once per ses
 
 ## Three bold upgrades
 1. **Prizes**: physical chip stacks that drop onto felt. Stack height shows rank without inventing a prize amount.
-2. **Stats**: a split-flap tote board instead of four big numbers with labels.
+2. **Reach**: after the hero, a dithered bit-gradient band (`components/motion/Dither.tsx`), then a dot globe you can throw (`components/reach/Globe.tsx`), drawn on a 2D canvas from a 2° land mask, with no WebGL. It cuts to a one-shot RGB-split glitch line.
 3. **The House**: a seating chart. With no sponsors confirmed, it shows empty chairs rather than fake logos.
+
+## Removed for density
+- The stats strip (~150 / 1 day / 1 game / ∞) repeated facts already in Reach and House Rules.
+- The three suit-wipe slabs between sections were decoration with nothing to say.
 
 ## Results
 - `tsc`, `eslint --max-warnings 0` and `next build`: zero warnings.
 - Lighthouse desktop: Performance 99, Accessibility 100, Best Practices 100, SEO 100.
-- Lighthouse mobile: Performance 89, Accessibility 100, Best Practices 100, SEO 100.
+- Lighthouse mobile: Performance 86 (LCP 3.6s, TBT 210ms, CLS 0), Accessibility 100, Best Practices 100, SEO 100.
 - Horizontal overflow: 0px at 375, 768, 1024, 1440 and 1920.
+
+## Softened
+
+Display type maxes cut 20 to 35% with looser leading (hero, `.h2`, Reach, Apply, footer watermark). Grain, vignette, card shadows, dither, globe dots and pings, and the glitch offsets all turned down.

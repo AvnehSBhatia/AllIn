@@ -13,9 +13,9 @@ type Layer = { el: HTMLCanvasElement; ctx: CanvasRenderingContext2D; chips: Chip
 // Home positions as fractions of the hero box, kept clear of the headline zone (left 45%, middle band),
 // the nav strip (top ~8%) and the caption row (bottom-left / bottom-right corners).
 const DESK = {
-  far: [[0.52, 0.12], [0.93, 0.2], [0.62, 0.86], [0.98, 0.62], [0.12, 0.14], [0.36, 0.94], [0.8, 0.14], [0.8, 0.95]],
-  mid: [[0.57, 0.24], [0.9, 0.36], [0.72, 0.86], [0.5, 0.7], [0.97, 0.84], [0.24, 0.9]],
-  near: [[0.99, 0.32], [0.5, 1.0], [0.3, 1.02]],
+  far: [[0.52, 0.14], [0.93, 0.2], [0.62, 0.86], [0.98, 0.62], [0.8, 0.95]],
+  mid: [[0.57, 0.26], [0.9, 0.36], [0.72, 0.86], [0.97, 0.84]],
+  near: [[0.99, 0.32], [0.56, 1.0]],
 };
 const MOBILE = {
   far: [[0.1, 0.62], [0.9, 0.66], [0.55, 0.98]],

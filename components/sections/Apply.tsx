@@ -52,7 +52,7 @@ export function Apply() {
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-24">
         <div className="relative">
           <p className="label text-text-3">Apply</p>
-          <SplitHeading id="apply-title" by="chars" className="h2 mt-5 text-[clamp(3.2rem,8vw,7rem)]">
+          <SplitHeading id="apply-title" by="chars" className="h2 mt-5 text-[clamp(2.8rem,6vw,5.25rem)]">
             {a.heading}
           </SplitHeading>
           <p className="lede mt-6">{a.body}</p>

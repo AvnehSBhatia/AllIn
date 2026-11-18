@@ -11,13 +11,10 @@ import { HeroTable, type TableHandle } from "@/components/hero/HeroTable";
 import { HeroChips } from "@/components/hero/HeroChips";
 import { TH, TILT_X, TILT_Z, TW } from "@/components/hero/table";
 
-/** Cards resting at the edges of the frame. Positions keep them out of the headline and button area. */
+/** A few cards resting at the edges of the frame, clear of the nav, the headline and both corner captions. */
 const EDGE = [
   { code: "Ks", w: 92, cls: "right-[-34px] bottom-[30%] lg:bottom-auto lg:top-[16%] lg:right-[-18px]", r: -18, from: "x" },
-  { code: "7h", w: 70, cls: "right-[30%] top-[72px] hidden lg:block", r: 24, from: "y" },
-  { code: "Qd", w: 84, cls: "right-[6%] bottom-[-44px] lg:right-[13%]", r: 12, from: "y" },
-  { code: "2c", w: 64, cls: "left-[38%] bottom-[-38px] hidden lg:block", r: -26, from: "y" },
-  { code: "Jh", w: 76, cls: "left-[-30px] bottom-[8%] hidden lg:block", r: 16, from: "x" },
+  { code: "Qd", w: 84, cls: "right-[6%] bottom-[-44px] lg:right-auto lg:left-[48%]", r: 12, from: "y" },
   { code: "9s", w: 58, cls: "left-[-26px] bottom-[4%] lg:hidden", r: -14, from: "x" },
   { code: "Ac", down: true, w: 66, cls: "right-[-24px] bottom-[34%] hidden lg:block", r: 98, from: "x" },
 ] as const;
@@ -130,23 +127,25 @@ export function Hero() {
       {/* edge cards */}
       {EDGE.map((c) => (
         <div key={c.code} aria-hidden data-from={c.from} className={`h-edge h-in invisible pointer-events-none absolute z-[1] ${c.cls}`} style={{ rotate: `${c.r}deg` }}>
-          <PlayingCard code={c.code} w={c.w} down={"down" in c} className="drop-shadow-[0_18px_24px_rgb(0_0_0/.6)]" />
+          <PlayingCard code={c.code} w={c.w} down={"down" in c} className="drop-shadow-[0_12px_20px_rgb(0_0_0/.35)]" />
         </div>
       ))}
 
       {/* text zone: left 45% */}
       <div className="relative z-[4] order-1 mx-auto flex w-full max-w-[1440px] flex-col px-5 pt-28 md:px-10 lg:min-h-[max(100svh,760px)] lg:justify-center lg:pt-24 lg:pb-16">
         <div className="lg:max-w-[45%] xl:max-w-[42%]">
-          <p className="h-fade h-in invisible label text-text-2">{config.umbrella}</p>
-          <h1 id="hero-title" className="h-title mt-5 font-display text-[clamp(5.2rem,19vw,8rem)] leading-[0.82] tracking-[-0.035em] lg:text-[clamp(7rem,11.5vw,11.5rem)]">
+          <p className="h-fade h-in invisible flex items-center gap-3">
+            <span className="text-[1.05rem] font-semibold tracking-[-0.01em] text-ivory">{config.organizer}</span>
+            <span aria-hidden className="h-4 w-px bg-hair" />
+            <span className="label text-text-2">The Research Hackathon</span>
+          </p>
+          <h1 id="hero-title" className="h-title mt-5 font-display text-[clamp(4.4rem,16vw,6.75rem)] leading-[0.88] tracking-[-0.03em] lg:text-[clamp(6rem,9vw,9rem)]">
             <span className="h-word h-in invisible block pb-[0.06em]">
               ALL <em className="not-italic lg:italic">IN</em>
             </span>
           </h1>
-          <p className="h-fade h-in invisible mt-6 max-w-[30ch] font-display text-[clamp(1.5rem,2.4vw,2.1rem)] leading-[1.1] text-ivory">{config.tagline}</p>
-          <p className="h-fade h-in invisible mt-4 max-w-[46ch] text-text-2">
-            {config.sub} The rules are a variant we wrote ourselves, and they stay sealed until kickoff.
-          </p>
+          <p className="h-fade h-in invisible mt-6 max-w-[30ch] font-display text-[clamp(1.35rem,2vw,1.8rem)] leading-[1.2] text-ivory">{config.tagline}</p>
+          <p className="h-fade h-in invisible mt-4 max-w-[40ch] text-text-2">An AI poker-bot competition on a variant we wrote. The rules stay sealed until kickoff.</p>
 
           <dl className="h-fade h-in invisible mt-8 grid max-w-[34rem] grid-cols-2 gap-x-6 gap-y-3 border-t border-hair pt-5 sm:grid-cols-4">
             {FACTS.map(([k, v]) => (

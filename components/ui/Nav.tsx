@@ -65,6 +65,7 @@ export function Nav() {
           >
             <Suit s="s" className="h-4 w-4 text-gold transition-transform duration-500 group-hover:rotate-[360deg]" />
             ALL <em className="-ml-1">IN</em>
+            <span className="ml-2 hidden border-l border-hair pl-3 font-sans text-[13px] font-semibold tracking-normal text-text-2 sm:inline">{config.organizer}</span>
           </a>
           <ul className="ml-auto hidden items-center gap-1 lg:flex">
             {config.nav.map((l) => (
