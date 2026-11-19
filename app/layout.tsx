@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { Geist, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Bodoni_Moda, Cinzel, EB_Garamond } from "next/font/google";
 import { config } from "@/lib/config";
 import "./globals.css";
 
-const display = Instrument_Serif({ variable: "--font-instrument", weight: "400", style: ["normal", "italic"], subsets: ["latin"] });
-const sans = Geist({ variable: "--font-geist", subsets: ["latin"] });
-const mono = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["latin"] });
+const display = Bodoni_Moda({ variable: "--font-bodoni", style: ["normal", "italic"], subsets: ["latin"] });
+const label = Cinzel({ variable: "--font-cinzel", subsets: ["latin"] });
+const text = EB_Garamond({ variable: "--font-garamond", style: ["normal", "italic"], subsets: ["latin"] });
 
-const description = `${config.sub} One day, about ${config.capacity} people, a secret variant revealed at kickoff. ${config.dateWindow}.`;
+const description = `${config.sub} About ${config.capacity} seats, ${config.dateWindow}, ${config.venueCity}.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(config.url),
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary_large_image", title: config.name, description },
 };
 
-export const viewport: Viewport = { themeColor: "#04110d", colorScheme: "dark" };
+export const viewport: Viewport = { themeColor: "#030303", colorScheme: "dark" };
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -36,15 +36,23 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
+    <html lang="en" className={`${display.variable} ${label.variable} ${text.variable}`}>
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body>
-        <a href="#main" className="btn btn-gold fixed top-3 left-3 z-[99] -translate-y-24 focus:translate-y-0">
+        <a href="#main" className="btn btn-brass fixed top-3 left-3 z-[99] -translate-y-24 focus:translate-y-0">
           Skip to content
         </a>
+        <div aria-hidden className="room-lamp" />
         {children}
+        {/* the room: vignette, grain and smoke over everything but the bar */}
+        <div aria-hidden className="room">
+          <div className="room-smoke one" />
+          <div className="room-smoke two" />
+          <div className="room-vignette" />
+          <div className="room-grain" />
+        </div>
       </body>
     </html>
   );

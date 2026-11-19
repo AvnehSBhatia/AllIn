@@ -1,44 +1,24 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { Menu, X } from "lucide-react";
 import { config } from "@/lib/config";
 import { Suit } from "./Suit";
 
-const DATE = config.date ? new Date(config.date).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "America/Los_Angeles" }).toLowerCase() : null;
+const LEFT = [
+  { label: "Format", href: "#win" },
+  { label: "The day", href: "#day" },
+  { label: "Prizes", href: "#prizes" },
+];
+const RIGHT = [
+  { label: "Team", href: "#team" },
+  { label: "Questions", href: "#faq" },
+];
+// links are set in the text face, ordinary case; only the wordmark and labels are engraved capitals
+const link = "link text-[1.12rem] leading-none text-text-2 hover:text-gold-bright";
 
-/** Terminal-style top bar: prompt brand, section tabs with scroll-spy, apply. A gold line under it tracks scroll. */
+/** The bar: black, the name in the middle on a gold lozenge rule, three links either side. Like the top of a menu card. */
 export function Nav() {
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState("");
   const menuBtn = useRef<HTMLButtonElement>(null);
-
-  // scroll-spy: the tab for whichever section crosses the upper third of the screen
-  useEffect(() => {
-    const els = config.nav.map((l) => document.querySelector(l.href)).filter((e): e is Element => !!e);
-    const io = new IntersectionObserver(
-      (es) =>
-        es.forEach((e) => {
-          const id = `#${e.target.id}`;
-          setActive((a) => (e.isIntersecting ? id : a === id ? "" : a));
-        }),
-      { rootMargin: "-30% 0px -65% 0px" },
-    );
-    els.forEach((e) => io.observe(e));
-    return () => io.disconnect();
-  }, []);
-
-  // off-screen sections only get their real height once scrolled past (content-visibility in globals.css),
-  // so a long smooth jump can land a bit short: nudge onto the target once the scroll settles
-  useEffect(() => {
-    const click = (e: MouseEvent) => {
-      const a = (e.target as Element).closest?.<HTMLAnchorElement>('a[href^="#"]');
-      const t = a?.hash.length && a.hash.length > 1 ? document.querySelector(a.hash) : null;
-      if (!t) return;
-      addEventListener("scrollend", () => Math.abs(t.getBoundingClientRect().top - parseFloat(getComputedStyle(t).scrollMarginTop)) > 4 && t.scrollIntoView(), { once: true });
-    };
-    document.addEventListener("click", click);
-    return () => document.removeEventListener("click", click);
-  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -48,75 +28,61 @@ export function Nav() {
   }, [open]);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-hair-soft bg-felt-950/92">
-      <nav aria-label="Main" className="mx-auto flex h-14 max-w-[1440px] items-center gap-6 px-5 font-mono md:px-10">
-        <a href="#top" className="flex h-10 items-center gap-2.5 text-[13px]" aria-label="ALL IN, back to top">
-          <span className="grid h-7 w-7 place-items-center rounded-[5px] border border-gold/50 bg-gold/10">
-            <Suit s="s" className="h-3.5 w-3.5 text-gold" />
-          </span>
-          <span className="font-semibold text-ivory">allin</span>
-          <span className="hidden text-text-3 sm:inline">@{config.organizer.toLowerCase()}</span>
-        </a>
-
-        <ul className="hidden items-center gap-0.5 lg:flex">
-          {config.nav.map((l) => {
-            const on = active === l.href;
-            return (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  aria-current={on ? "location" : undefined}
-                  className={`flex h-8 items-center gap-1.5 rounded-[5px] px-2.5 text-[12.5px] transition-colors ${on ? "bg-gold/10 text-gold-bright" : "text-text-2 hover:bg-ivory/5 hover:text-ivory"}`}
-                >
-                  <span aria-hidden className={on ? "text-gold" : "text-text-3/60"}>
-                    {on ? ">" : "/"}
-                  </span>
-                  {l.label.toLowerCase()}
-                </a>
-              </li>
-            );
-          })}
+    <header className="lacquer fixed inset-x-0 top-0 z-50">
+      <nav aria-label="Main" className="mx-auto grid h-[72px] max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center px-6 md:px-14">
+        <ul className="hidden items-center gap-11 lg:flex">
+          {LEFT.map((l) => (
+            <li key={l.href}>
+              <a href={l.href} className={link}>
+                {l.label}
+              </a>
+            </li>
+          ))}
         </ul>
 
-        <div className="ml-auto flex items-center gap-3">
-          {DATE && (
-            <span className="hidden items-center gap-2 text-[11.5px] text-text-3 xl:flex">
-              <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-gold" />
-              {DATE}
-            </span>
-          )}
-          <a href={config.applyUrl || "#apply"} className="btn btn-gold min-h-10 px-3.5 text-[12.5px]">
-            <span aria-hidden className="opacity-60">$</span> apply
-          </a>
-          <button
-            ref={menuBtn}
-            type="button"
-            className="grid h-10 w-10 place-items-center rounded-[5px] border border-hair-soft text-ivory lg:hidden"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            aria-label={open ? "Close menu" : "Open menu"}
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <X size={18} strokeWidth={1.5} /> : <Menu size={18} strokeWidth={1.5} />}
-          </button>
-        </div>
-      </nav>
-      <span aria-hidden className="nav-progress absolute inset-x-0 -bottom-px h-px origin-left bg-gold" />
+        <a href="#top" className="col-start-1 flex items-center gap-3.5 justify-self-start lg:col-start-2 lg:justify-self-center" aria-label="ALL IN, back to top">
+          <span aria-hidden className="hidden h-px w-9 bg-linear-to-r from-transparent to-hair lg:block" />
+          <Suit s="s" className="size-3 text-gold" />
+          <span className="gilt font-display text-[1.6rem] leading-none tracking-[0.22em]">
+            ALL <em>IN</em>
+          </span>
+          <Suit s="s" className="hidden size-3 text-gold lg:block" />
+          <span aria-hidden className="hidden h-px w-9 bg-linear-to-l from-transparent to-hair lg:block" />
+        </a>
 
-      {open && (
-        <div id="mobile-menu" className="fixed inset-x-0 top-14 bottom-0 overflow-y-auto border-t border-hair-soft bg-felt-950 px-5 pt-4 pb-10 font-mono lg:hidden">
-          <p className="py-3 text-[12px] text-text-3">~/allin $ ls sections</p>
-          <ul>
-            {config.nav.map((l, i) => (
-              <li key={l.href} className="border-b border-hair-soft">
-                <a href={l.href} className="flex min-h-14 items-center gap-4 text-xl text-ivory" onClick={() => setOpen(false)}>
-                  <span className="text-[12px] text-gold">{String(i + 1).padStart(2, "0")}</span>
-                  {l.label.toLowerCase()}
+        <div className="col-start-3 flex items-center justify-end gap-11">
+          <ul className="hidden items-center gap-11 lg:flex">
+            {RIGHT.map((l) => (
+              <li key={l.href}>
+                <a href={l.href} className={link}>
+                  {l.label}
                 </a>
               </li>
             ))}
           </ul>
-          <p className="mt-8 text-[12px] leading-relaxed text-text-3">{config.safety}</p>
+          <a href={config.applyUrl || "#apply"} className="btn btn-ghost hidden min-h-10 px-6 text-[1.08rem] sm:inline-flex">
+            Apply
+          </a>
+          <button ref={menuBtn} type="button" className={`${link} min-h-11 lg:hidden`} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}>
+            {open ? "Close" : "Menu"}
+          </button>
+        </div>
+      </nav>
+      {/* a bevelled gold rail under the lacquer */}
+      <div aria-hidden className="rule-gold" />
+
+      {open && (
+        <div id="mobile-menu" className="fixed inset-x-0 top-[75px] bottom-0 overflow-y-auto bg-black px-5 pt-6 pb-10 lg:hidden">
+          <ul>
+            {[...LEFT, ...RIGHT, { label: "Apply", href: "#apply" }].map((l) => (
+              <li key={l.href} className="border-b border-hair-soft">
+                <a href={l.href} className="flex min-h-16 items-center font-display text-3xl text-ivory" onClick={() => setOpen(false)}>
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-8 text-base text-text-3 italic">{config.safety}</p>
         </div>
       )}
     </header>

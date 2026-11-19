@@ -8,7 +8,8 @@ export async function POST(req: Request) {
   if (!parsed.success) {
     return NextResponse.json({ ok: false, errors: z.flattenError(parsed.error).fieldErrors }, { status: 400 });
   }
-  // ponytail: no storage yet. Wire this to a sheet, DB or email when the organisers pick one (TBA).
+  if (parsed.data.company) return NextResponse.json({ ok: true }); // honeypot: pretend it worked
+  // NOT STORED YET. Applications are validated and then dropped until a database is connected (see README, "Applications").
   console.info("[apply]", parsed.data.email, parsed.data.role);
   return NextResponse.json({ ok: true });
 }

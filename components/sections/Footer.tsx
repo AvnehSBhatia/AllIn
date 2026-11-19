@@ -2,42 +2,27 @@ import { config } from "@/lib/config";
 
 export function Footer() {
   return (
-    <footer className="relative overflow-clip border-t border-hair px-5 pt-20 pb-8 md:px-10">
-      <div className="mx-auto max-w-[1440px]">
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-[minmax(0,1fr)_auto]">
-          <div>
-            <p className="label text-text-3">{config.umbrella}</p>
-            <p className="mt-6 max-w-[34ch] text-lg text-ivory">{config.safety}</p>
+    <footer className="lacquer relative z-40 px-6 py-10 md:px-14">
+      <div aria-hidden className="rule-gold absolute inset-x-0 top-0" />
+      <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-x-10 gap-y-3">
+        <span className="label text-gold">
+          © {config.organizer} · {config.umbrella.split(" · ")[0]}
+        </span>
+        <span className="text-base text-text-3 italic">{config.safety}</span>
+        {(config.contactEmail || config.socials.length > 0) && (
+          <span className="label flex gap-6 text-text-2">
             {config.contactEmail && (
-              <a href={`mailto:${config.contactEmail}`} className="link mt-6 inline-block font-mono text-sm text-text-2 hover:text-ivory">
+              <a href={`mailto:${config.contactEmail}`} className="link">
                 {config.contactEmail}
               </a>
             )}
-          </div>
-          <nav aria-label="Footer">
-            <ul className="grid grid-cols-2 gap-x-10 gap-y-3 font-mono text-xs tracking-[0.14em] uppercase">
-              {[...config.nav, { label: "Apply", href: "#apply" }].map((n) => (
-                <li key={n.href}>
-                  <a href={n.href} className="link inline-flex min-h-10 items-center text-text-2 hover:text-ivory md:min-h-0">
-                    {n.label}
-                  </a>
-                </li>
-              ))}
-              {config.socials.map((s) => (
-                <li key={s.href}>
-                  <a href={s.href} className="link inline-flex min-h-10 items-center text-text-2 hover:text-ivory md:min-h-0" rel="noopener" target="_blank">
-                    {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-
-        <div className="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-hair-soft pt-6 font-mono text-[11px] tracking-[0.12em] text-text-3 uppercase">
-          <span>© {config.organizer}</span>
-          <span>Virtual chips only</span>
-        </div>
+            {config.socials.map((s) => (
+              <a key={s.href} href={s.href} className="link" rel="noopener" target="_blank">
+                {s.label}
+              </a>
+            ))}
+          </span>
+        )}
       </div>
     </footer>
   );

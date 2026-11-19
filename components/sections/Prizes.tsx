@@ -1,66 +1,48 @@
-import { type CSSProperties } from "react";
+import type { CSSProperties } from "react";
 import { config } from "@/lib/config";
-import { CHIP_COLORS, Chip } from "@/components/ui/Chip";
+import { Lead, Panel, i, type Prop } from "@/components/deck/Panel";
+import { Suit, isRed } from "@/components/ui/Suit";
+import { stain } from "@/lib/stain";
 
-// Stack heights follow the prize amounts.
-const HEIGHT = [16, 7, 7, 4];
+const PROPS: Prop[] = [
+  { chip: "gold", x: 6, y: 20, d: 22 },
+  { chip: "red", x: 11, y: 66, d: 8 },
+  { chip: "black", x: 88, y: 14, d: 10 },
+  { chip: "white", x: 86, y: 62, d: 24 },
+];
 
-/** Four prizes as four stacks of chips on the felt. */
+/** Three prizes on three identical cards, so none reads as the lesser one. They are dealt face down, then turned. */
 export function Prizes() {
   const p = config.prizes;
   return (
-    <section id="prizes" aria-labelledby="prizes-title" className="relative px-5 py-16 md:px-10 md:py-36">
-      <div className="mx-auto max-w-[1440px]">
-        <p className="eyebrow">Prizes</p>
-        <div className="mt-5 flex flex-wrap items-end justify-between gap-6">
-          <h2 id="prizes-title" className="h2 max-w-[12ch]">
-            Four pots on the table.
-          </h2>
-          <p className="font-mono text-sm tracking-[0.14em] text-gold-bright uppercase">{p.note}</p>
-        </div>
-
-        <div className="felt relative mt-14 rounded-lg px-5 pt-14 pb-8 md:px-12 md:pt-20 md:pb-12">
-          <ul className="grid grid-cols-2 gap-x-6 gap-y-14 md:grid-cols-[1.5fr_1fr_1fr_1fr] md:gap-10">
-            {p.items.map((it, i) => (
-              <li key={it.title} className={`flex flex-col ${i === 0 ? "col-span-2 md:col-span-1" : ""}`}>
-                <div className={`flex items-end md:h-[260px] ${i === 0 ? "h-[210px]" : "h-[130px]"}`} aria-hidden>
-                  <Stack color={it.chip} n={HEIGHT[i]} wide={i === 0} />
-                </div>
-                <div className="mt-6 border-t border-hair-soft pt-4">
-                  <p className="label text-text-3">{it.label}</p>
-                  <p className={`mt-2 font-display leading-none text-gold-bright ${i === 0 ? "text-[clamp(2.4rem,4vw,3.4rem)]" : "text-[2rem]"}`}>{it.amount}</p>
-                  <h3 className={`mt-2 font-display leading-[1.05] text-ivory ${i === 0 ? "text-[clamp(1.6rem,2.4vw,2.1rem)]" : "text-[1.35rem]"}`}>{it.title}</h3>
-                  <p className="mt-2 text-sm text-text-2">{it.body}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/** Side-on stack: edge bands with the white inlay marks, the face of the top chip seen at an angle. */
-function Stack({ color, n, wide }: { color: keyof typeof CHIP_COLORS; n: number; wide?: boolean }) {
-  const { base, stripe } = CHIP_COLORS[color];
-  const w = wide ? 132 : 96;
-  return (
-    <div className="relative flex flex-col items-center" style={{ width: w } as CSSProperties}>
-      <div className="relative z-10 -mb-[7px] w-full" style={{ height: Math.round(w * 0.4) }}>
-        <Chip color={color} className="absolute inset-x-0 top-1/2 w-full -translate-y-1/2 scale-y-[0.4]" />
-      </div>
-      {Array.from({ length: n }, (_, k) => (
-        <span
-          key={k}
-          className="relative block h-3 w-full rounded-[50%/40%] shadow-[0_2px_0_rgb(0_0_0/.35)]"
-          style={{
-            background: `repeating-linear-gradient(90deg, ${base} 0 11%, ${stripe} 11% 16%)`,
-            marginTop: k ? -3 : 0,
-            translate: `${((k * 37) % 7) - 3}px 0`,
-          }}
-        />
-      ))}
-    </div>
+    <Panel id="prizes" title="prizes-title" props={PROPS}>
+      <Lead id="prizes-title" label="Prizes" heading={p.heading} />
+      <ul className="mt-12 grid w-full max-w-[56rem] grid-cols-1 gap-7 sm:grid-cols-3 sm:gap-8">
+        {p.items.map((it, k) => {
+          const ink = isRed(it.suit) ? "text-oxblood" : "text-ink";
+          return (
+            <li key={it.title} {...i(9 + k * 2, { "--from": "0px -70px", "--spin": `${(k - 1) * 6}deg`, "--rot": `${(k - 1) * 1.5}deg` })} className="a [perspective:1400px]">
+              <div className="flip lift" style={{ "--i": 16 + k * 4 } as CSSProperties}>
+                <article className="card flex h-full flex-col items-center px-6 pt-9 pb-10 text-center" style={stain(40 + k)}>
+                  <Suit s={it.suit} className={`absolute top-5 left-5 size-4 ${ink}`} />
+                  <Suit s={it.suit} className={`absolute right-5 bottom-5 size-4 rotate-180 ${ink}`} />
+                  <p className="label text-ink-2">{it.how}</p>
+                  <p data-count={it.amount.replace(/\D/g, "")} className="mt-5 font-display text-[clamp(3.2rem,5vw,4.3rem)] leading-none tracking-[-0.03em] text-ink tabular-nums">
+                    {it.amount}
+                  </p>
+                  <span aria-hidden className="mt-5 h-px w-10 bg-ink/40" />
+                  <h3 className="mt-4 font-display text-[1.6rem] leading-tight text-oxblood italic">{it.title}</h3>
+                  <p className="mt-1.5 text-[1.05rem] text-ink-2">{it.extra}</p>
+                </article>
+                <div aria-hidden className="pc-back [--w:230px] !rounded-[12px]" />
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+      <p {...i(34)} className="a mt-10 text-[1.2rem] text-text-2 italic">
+        {p.raffle}
+      </p>
+    </Panel>
   );
 }

@@ -18,15 +18,15 @@ export default async function Image() {
   const [serif, serifItalic, jet] = await Promise.all([font("Instrument+Serif", "ALL "), font("Instrument+Serif", "IN", true), font("JetBrains+Mono", mono)]);
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: 72, color: "#f3ecda", background: "radial-gradient(90% 120% at 78% 40%, #14503f 0%, #0b2e24 40%, #04110d 85%)" }}>
+      <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", padding: 72, color: "#e2d2a8", background: "radial-gradient(90% 120% at 78% 40%, #0e3629 0%, #061812 40%, #020a07 85%)" }}>
         <div style={{ fontFamily: "Jet", fontSize: 22, letterSpacing: 4, color: "rgba(243,236,218,.7)" }}>{config.umbrella.toUpperCase()}</div>
         <div style={{ display: "flex", alignItems: "flex-end", fontSize: 300, lineHeight: 0.8, letterSpacing: -10 }}>
           <span style={{ fontFamily: "Serif" }}>ALL </span>
-          <span style={{ fontFamily: "SerifItalic", color: "#f2d98a" }}>IN</span>
+          <span style={{ fontFamily: "SerifItalic", color: "#e9c873" }}>IN</span>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontFamily: "Jet", fontSize: 22, letterSpacing: 3, color: "rgba(243,236,218,.7)", borderTop: "1px solid rgba(214,178,94,.4)", paddingTop: 24 }}>
           <span>{`${config.dateWindow.toUpperCase()} · ~${config.capacity} SEATS · ONE DAY`}</span>
-          <span style={{ color: "#d6b25e" }}>VIRTUAL CHIPS ONLY</span>
+          <span style={{ color: "#c9a046" }}>VIRTUAL CHIPS ONLY</span>
         </div>
       </div>
     ),

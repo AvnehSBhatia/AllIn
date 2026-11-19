@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { SUIT_PATHS } from "./Suit";
 
 export const CHIP_COLORS = {
@@ -10,10 +11,10 @@ export const CHIP_COLORS = {
 export type ChipColor = keyof typeof CHIP_COLORS;
 
 /** Top-down chip face. */
-export function Chip({ color = "black", className, mark = true }: { color?: ChipColor; className?: string; mark?: boolean }) {
+export function Chip({ color = "black", className, mark = true, style }: { color?: ChipColor; className?: string; mark?: boolean; style?: CSSProperties }) {
   const { base, stripe } = CHIP_COLORS[color];
   return (
-    <svg viewBox="0 0 100 100" className={className} aria-hidden>
+    <svg viewBox="0 0 100 100" className={className} style={style} aria-hidden>
       <circle cx="50" cy="50" r="49" fill={base} />
       {Array.from({ length: 8 }, (_, i) => (
         <rect key={i} x="45" y="1.5" width="10" height="15" rx="1.5" fill={stripe} transform={`rotate(${i * 45} 50 50)`} />

@@ -1,6 +1,5 @@
 import type { CSSProperties } from "react";
-import { GLYPH, Suit, isRed } from "./Suit";
-import type { SuitKey } from "@/lib/poker";
+import { GLYPH, Suit, isRed, type SuitKey } from "./Suit";
 
 const RANK_LABEL: Record<string, string> = { T: "10" };
 

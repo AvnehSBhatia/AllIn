@@ -1,35 +1,30 @@
+import { config } from "@/lib/config";
 import { Nav } from "@/components/ui/Nav";
+import { Deck } from "@/components/deck/Deck";
 import { Hero } from "@/components/sections/Hero";
-import { Manifesto } from "@/components/sections/Manifesto";
-import { Classified } from "@/components/sections/Classified";
-import { LiveTable } from "@/components/sections/LiveTable";
-import { Format, Streets } from "@/components/sections/Format";
-import { Judging } from "@/components/sections/Judging";
+import { WhyPoker } from "@/components/sections/WhyPoker";
+import { HowYouWin } from "@/components/sections/HowYouWin";
+import { Day } from "@/components/sections/Day";
 import { Prizes } from "@/components/sections/Prizes";
-import { Workshops } from "@/components/sections/Workshops";
-import { House } from "@/components/sections/House";
 import { Team } from "@/components/sections/Team";
-import { Faq } from "@/components/sections/Faq";
 import { Apply } from "@/components/sections/Apply";
 import { Footer } from "@/components/sections/Footer";
 
+const IDS = config.panels.map((p) => p.id);
+
+/** The hero, then seven sections of tabletop, in the order of config.panels. */
 export default function Home() {
   return (
     <>
       <Nav />
+      <Deck ids={IDS} />
       <main id="main">
         <Hero />
-        <Manifesto />
-        <Classified />
-        <LiveTable />
-        <Format />
-        <Streets />
-        <Judging />
+        <WhyPoker />
+        <HowYouWin />
+        <Day />
         <Prizes />
-        <Workshops />
-        <House />
         <Team />
-        <Faq />
         <Apply />
       </main>
       <Footer />

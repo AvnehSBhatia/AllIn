@@ -1,4 +1,4 @@
-import type { SuitKey } from "@/lib/poker";
+export type SuitKey = "s" | "h" | "d" | "c";
 
 /** Hand-drawn suit marks (24×24). Also used as Path2D on canvas. */
 export const SUIT_PATHS: Record<SuitKey, string> = {
