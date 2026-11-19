@@ -67,7 +67,7 @@ export const config = {
     lead: "Chess shows you the whole board. Poker shows you two cards and the way someone bet.",
     body: [
       "The rest you infer, against someone trying to mislead you.",
-      "And plain Hold'em is nearly solved. You can download a strong bot.",
+      "And plain Hold'em is close to solved. You can download a strong bot.",
     ],
     turn: "So we changed the game.",
     close: "Rules at kickoff. One day to build a bot that plays them well.",
@@ -163,7 +163,7 @@ export const config = {
     { q: "How much does it cost?", a: "TBA." },
     { q: "What skills do I need?", a: "One programming language. Some probability helps. No poker theory needed; the variant is new to everyone." },
     { q: "Which languages can we use?", a: "TBA, announced with the engine API." },
-    { q: "Where and when?", a: "Saturday, January 30, 2027, Zoho HQ, Pleasanton, CA. 8:30 AM to 8:30 PM." },
+    { q: "Where and when?", a: "Saturday, January 30, 2027, Zoho HQ, Pleasanton, CA. 8:30 AM to 8:30 PM. Co-hosted with YRI." },
     { q: "What should I bring?", a: "A laptop and charger. Lunch and dinner are on us." },
     { q: "What's the research component?", a: "Win rate is one of four criteria, with novelty, progress and a demo." },
     { q: "Is there gambling?", a: "No. Virtual chips only." },

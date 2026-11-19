@@ -152,9 +152,9 @@ dd {
     color: var(--text-2);
     text-transform: lowercase;
   }
-  .eyebrow::before {
-    counter-increment: sec;
-    content: "[" counter(sec, decimal-leading-zero) "]";
+  /* numbered by Nav.tsx: a CSS counter can't cross the content-visibility sections */
+  .eyebrow[data-n]::before {
+    content: "[" attr(data-n) "]";
     color: var(--gold);
   }
   .eyebrow::after {
@@ -467,10 +467,6 @@ section[id] {
 }
 .t-tip[data-on] {
   opacity: 1;
-}
-
-main {
-  counter-reset: sec;
 }
 
 /* terminal window header on panels (TermBar.tsx) */

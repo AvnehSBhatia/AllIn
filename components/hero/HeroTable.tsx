@@ -71,6 +71,14 @@ export const HeroTable = forwardRef<TableHandle, { playing: boolean; reduced: bo
       const pots = q(".t-pot");
       const showPot = (lvl: number) => potChips.forEach((c, i) => gsap.set(c, { autoAlpha: i % POT_PER < Math.ceil(lvl / POT_STACKS) ? 1 : 0 }));
 
+      // what each laptop shows: an EV line and the action it took
+      const say = (seat: number, ev: string, act: string) => {
+        const el = q(`.t-seat[data-seat="${seat}"]`)[0];
+        if (!el) return;
+        el.querySelector(".t-ev")!.textContent = ev;
+        el.querySelector(".t-act")!.textContent = act;
+      };
+
       if (reduced) {
         q(".t-seat").forEach((_, i) => say(i, "ev  --", hand.live.includes(i) ? (i === hand.winner ? "> WIN" : "> CALL") : "> FOLD"));
         gsap.set(boards.map((b) => b.firstElementChild), { rotationY: 0 });
@@ -88,13 +96,6 @@ export const HeroTable = forwardRef<TableHandle, { playing: boolean; reduced: bo
         const x = Number((el as HTMLElement).dataset.x);
         const y = Number((el as HTMLElement).dataset.y);
         return { x: dealer.x - x, y: dealer.y - y };
-      };
-      // what each laptop shows: an EV line and the action it took
-      const say = (seat: number, ev: string, act: string) => {
-        const el = q(`.t-seat[data-seat="${seat}"]`)[0];
-        if (!el) return;
-        el.querySelector(".t-ev")!.textContent = ev;
-        el.querySelector(".t-act")!.textContent = act;
       };
       const think = (seat: number) => () => {
         q(".t-seat").forEach((s) => s.removeAttribute("data-think"));

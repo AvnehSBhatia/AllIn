@@ -12,6 +12,11 @@ export function Nav() {
   const [active, setActive] = useState("");
   const menuBtn = useRef<HTMLButtonElement>(null);
 
+  // number the section labels [01], [02]… in page order
+  useEffect(() => {
+    document.querySelectorAll<HTMLElement>("main .eyebrow").forEach((e, i) => (e.dataset.n = String(i + 1).padStart(2, "0")));
+  }, []);
+
   // scroll-spy: the tab for whichever section crosses the upper third of the screen
   useEffect(() => {
     const els = config.nav.map((l) => document.querySelector(l.href)).filter((e): e is Element => !!e);
