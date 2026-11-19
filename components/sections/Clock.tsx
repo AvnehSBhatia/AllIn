@@ -76,30 +76,47 @@ export function Clock() {
     const sticky = matchMedia("(min-width: 1024px) and (min-height: 700px)");
     const L = LEVELS.length;
     let raf = 0;
+    let lastK = -1, lastA = -1, lastPin: boolean | null = null, shifts: number[] = [];
+    let near = true; // only do work while the section is on (or close to) the screen
+    const io = new IntersectionObserver(([e]) => ((near = e.isIntersecting), near && queue()), { rootMargin: "50% 0px" });
+    io.observe(el);
+    const measure = () => {
+      // layout reads happen once per resize, not every scroll frame
+      const max = Math.max(0, list.scrollHeight - win.clientHeight);
+      shifts = rows.map((row) => -Math.min(max, Math.max(0, row.offsetTop - win.clientHeight * 0.3)));
+      lastK = -1;
+      lastPin = null;
+    };
     const update = () => {
       raf = 0;
+      if (!near) return;
       const r = el.getBoundingClientRect();
       const pin = sticky.matches;
       const raw = pin ? (stick.getBoundingClientRect().top - r.top) / (r.height - stick.offsetHeight) : (innerHeight - r.top) / (innerHeight + r.height);
       const p = Math.min(1, Math.max(0, pin ? raw : raw * 1.6));
       const k = Math.min(L - 1, Math.floor(p * L));
+      const a = Math.round((p * 540) / 22.5) * 22.5; // 22.5° a frame: stop-motion, not a smooth spin
+      if (a !== lastA) stk.style.setProperty("--a", `${(lastA = a)}deg`);
+      if (k === lastK && pin === lastPin) return;
       chips.forEach((c, i) => (c.dataset.on = String(i <= k)));
-      stk.style.setProperty("--a", `${Math.round((p * 540) / 22.5) * 22.5}deg`); // 22.5° a frame: stop-motion, not a smooth spin
       focus.innerHTML = `lvl <span class="text-gold">${pad(k + 1)}</span> · ${LEVELS[k].t} · <span class="text-ivory">${LEVELS[k].what}</span>`;
       if (pin) {
         rows.forEach((row, i) => (row.dataset.s = i < k ? "past" : i === k ? "at" : "next"));
-        const max = Math.max(0, list.scrollHeight - win.clientHeight);
-        list.style.setProperty("--shift", `${-Math.min(max, Math.max(0, rows[k].offsetTop - win.clientHeight * 0.3))}px`);
-      } else {
+        list.style.setProperty("--shift", `${shifts[k]}px`);
+      } else if (lastPin !== false) {
         rows.forEach((row) => delete row.dataset.s);
         list.style.removeProperty("--shift");
       }
+      lastK = k;
+      lastPin = pin;
     };
     const queue = () => (raf ||= requestAnimationFrame(update));
+    const onResize = () => (measure(), queue());
+    measure();
     update();
     addEventListener("scroll", queue, { passive: true });
-    addEventListener("resize", queue);
-    return () => (removeEventListener("scroll", queue), removeEventListener("resize", queue), cancelAnimationFrame(raf));
+    addEventListener("resize", onResize);
+    return () => (io.disconnect(), removeEventListener("scroll", queue), removeEventListener("resize", onResize), cancelAnimationFrame(raf));
   }, []);
 
   const first = LEVELS[0];
@@ -124,7 +141,7 @@ export function Clock() {
   const next = before ? first : live >= 0 ? LEVELS[live + 1] : null;
 
   return (
-    <div ref={ref} className="clk mt-20 md:ml-[18%]">
+    <div ref={ref} className="clk mt-12 md:ml-[18%]">
       <div className="clk-stick">
         <div className="felt flex h-full flex-col overflow-hidden rounded-lg">
           <div className="term-bar">

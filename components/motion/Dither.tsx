@@ -25,29 +25,37 @@ export function Dither({ seed = 0, className = "" }: { seed?: number; className?
     let raf = 0;
     let visible = false;
 
+    // RGBA packed little-endian so one write per pixel
+    const PX = LEVELS.map((c) => (c ? (c[3] << 24) | (c[2] << 16) | (c[1] << 8) | c[0] : 0));
+    let px: Uint32Array;
+    let cols: Float32Array, rowsA: Float32Array;
+
     const draw = (t: number) => {
-      const d = img.data;
       const s = t * 0.16 + seed * 1.7; // one full sway ≈ 40s
       const p = 0.5 + 0.32 * Math.sin(s); // hot spot A drifts left↔right
       const q = 0.5 + 0.18 * Math.sin(s * 0.7 + 1.3); // B drifts on its own beat
+      const hv = 0.6 + 0.05 * Math.sin(s * 0.8);
+      // every term splits into (function of x) × (function of y): precompute per column and per row
+      for (let x = 0; x < w; x++) {
+        const u = x / w;
+        cols[x * 3] = 0.55 + 0.45 * Math.sin(u * 3.2 + s * 1.4);
+        cols[x * 3 + 1] = Math.exp(-((u - 0.1 - 0.7 * p) ** 2) * 7);
+        cols[x * 3 + 2] = Math.exp(-((u - 0.95 + 0.5 * q) ** 2) * 12);
+      }
       for (let y = 0; y < h; y++) {
         const v = y / h;
-        for (let x = 0; x < w; x++) {
-          const u = x / w;
-          const horizon = Math.exp(-((v - 0.6 - 0.05 * Math.sin(s * 0.8)) ** 2) * 16) * (0.55 + 0.45 * Math.sin(u * 3.2 + s * 1.4));
-          const a = Math.exp(-((u - 0.1 - 0.7 * p) ** 2 * 7 + (v - 0.55) ** 2 * 9));
-          const b = Math.exp(-((u - 0.95 + 0.5 * q) ** 2 * 12 + (v - 0.32 - 0.1 * q) ** 2 * 10));
+        rowsA[y * 3] = 0.75 * Math.exp(-((v - hv) ** 2) * 16);
+        rowsA[y * 3 + 1] = 0.7 * Math.exp(-((v - 0.55) ** 2) * 9);
+        rowsA[y * 3 + 2] = 0.5 * Math.exp(-((v - 0.32 - 0.1 * q) ** 2) * 10);
+      }
+      for (let y = 0; y < h; y++) {
+        const rh = rowsA[y * 3], ra = rowsA[y * 3 + 1], rb = rowsA[y * 3 + 2];
+        const by = (y & 7) * 8;
+        let i = y * w;
+        for (let x = 0; x < w; x++, i++) {
           // soft-saturate so the peak tops out around 10% gold dots, never a solid patch
-          const f = 0.7 * (1 - Math.exp(-1.3 * (0.75 * horizon + 0.7 * a + 0.5 * b)));
-          const k = f * 3;
-          const c = LEVELS[Math.floor(k) + (k % 1 > BAYER[(y & 7) * 8 + (x & 7)] ? 1 : 0)];
-          const i = (y * w + x) * 4;
-          if (c) {
-            d[i] = c[0];
-            d[i + 1] = c[1];
-            d[i + 2] = c[2];
-            d[i + 3] = c[3];
-          } else d[i + 3] = 0;
+          const k = 2.1 * (1 - Math.exp(-1.3 * (rh * cols[x * 3] + ra * cols[x * 3 + 1] + rb * cols[x * 3 + 2])));
+          px[i] = PX[(k | 0) + (k % 1 > BAYER[by + (x & 7)] ? 1 : 0)];
         }
       }
       ctx.putImageData(img, 0, 0);
@@ -59,6 +67,9 @@ export function Dither({ seed = 0, className = "" }: { seed?: number; className?
       cv.width = w;
       cv.height = h;
       img = ctx.createImageData(w, h);
+      px = new Uint32Array(img.data.buffer);
+      cols = new Float32Array(w * 3);
+      rowsA = new Float32Array(h * 3);
       draw(performance.now() / 1000);
     };
 

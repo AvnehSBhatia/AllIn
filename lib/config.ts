@@ -90,13 +90,6 @@ export const config = {
   },
 
   /** The Streets: the day as a hand. Times are from the run of show below. */
-  streets: [
-    { street: "Pre-flop", title: "Doors & opening", time: "8:30 AM", body: "Check in, find your team, coffee. The opening ceremony starts at 9:00." },
-    { street: "Flop", title: "Rules revealed. Build.", time: "9:30 AM", body: "The variant unseals. You get the engine, the API and a basic baseline bot. Submit to the live leaderboard as often as you like." },
-    { street: "Turn", title: "Train, resubmit, climb", time: "12:00 PM", body: "Lunch, then two workshops while the leaderboard keeps running. See what breaks, patch it, resubmit." },
-    { street: "River", title: "Code freeze. Playoffs.", time: "6:00 PM", body: "Bots lock with dinner. The bracket seats about six bots a table; the top two at each table advance until one is left." },
-    { street: "Showdown", title: "Demos & awards", time: "6:45 PM", body: "Short demos to the judges, then awards at 8:15. Doors close at 8:30." },
-  ],
 
   /** Run of show, Saturday Jan 30. */
   schedule: [
@@ -143,7 +136,7 @@ export const config = {
     { name: "Avneh", title: "Co-founder · Chief Capital & Adjudication Officer", job: "Co-founded ExeaLabs. Finances, logistics, corporate sponsors and judges.", founder: true },
     { name: "Joshua", title: "Co-founder · Chief Treasury & Partnerships Officer", job: "Co-founded ExeaLabs. Finances, logistics and sponsor outreach.", founder: true },
     { name: "Andre", title: "Co-founder · Chief Fiscal & Operations Officer", job: "Co-founded ExeaLabs. Finances, logistics and local sponsors.", founder: true },
-    { name: "Jasraj", title: "Chief Interface Officer & Provisions Strategist", job: "Builds this website. Also food and sponsor outreach." },
+    { name: "Jasraj", title: "Chief Interface & Operations Officer", job: "Builds this website. Overall logistics, food, sponsorships and outreach." },
     { name: "Sahil", title: "VP, Real Estate Acquisition", job: "Venue and sponsor outreach." },
     { name: "Amar", title: "Head of Physical Infrastructure", job: "Venue and sponsor outreach." },
     { name: "Svanik", title: "Director of Caloric Logistics", job: "Food and sponsor outreach." },

@@ -27,6 +27,19 @@ export function Nav() {
     return () => io.disconnect();
   }, []);
 
+  // off-screen sections only get their real height once scrolled past (content-visibility in globals.css),
+  // so a long smooth jump can land a bit short: nudge onto the target once the scroll settles
+  useEffect(() => {
+    const click = (e: MouseEvent) => {
+      const a = (e.target as Element).closest?.<HTMLAnchorElement>('a[href^="#"]');
+      const t = a?.hash.length && a.hash.length > 1 ? document.querySelector(a.hash) : null;
+      if (!t) return;
+      addEventListener("scrollend", () => Math.abs(t.getBoundingClientRect().top - parseFloat(getComputedStyle(t).scrollMarginTop)) > 4 && t.scrollIntoView(), { once: true });
+    };
+    document.addEventListener("click", click);
+    return () => document.removeEventListener("click", click);
+  }, []);
+
   useEffect(() => {
     if (!open) return;
     const esc = (e: KeyboardEvent) => e.key === "Escape" && (setOpen(false), menuBtn.current?.focus());

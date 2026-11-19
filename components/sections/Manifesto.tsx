@@ -32,8 +32,13 @@ export function Manifesto() {
     const beats = frames.flatMap((_, i) => (owner[i + 1] === owner[i] ? [i] : [i, i])); // last frame of a scene holds one extra beat
     const sticky = matchMedia("(min-width: 1024px) and (min-height: 700px)");
     let raf = 0;
+    let lastN = -1;
+    let near = true;
+    const io = new IntersectionObserver(([e]) => ((near = e.isIntersecting), near && queue()), { rootMargin: "50% 0px" });
+    io.observe(sec);
     const update = () => {
       raf = 0;
+      if (!near) return;
       const vh = innerHeight;
       const b = sec.getBoundingClientRect();
       let n: number;
@@ -41,6 +46,8 @@ export function Manifesto() {
         const p = Math.max(0, (vh * 0.5 - b.top) / (b.height - vh * 0.5));
         n = 1 + beats[Math.min(beats.length - 1, Math.floor(p * beats.length * 1.05))];
       } else n = frames.filter((f) => f.getBoundingClientRect().top < vh * 0.88).length;
+      if (n === lastN) return; // nothing moved a frame: skip the DOM writes
+      lastN = n;
       const live = owner[Math.max(0, n - 1)];
       scenes.forEach((s, i) => (s.dataset.state = i < live ? "past" : i === live ? "on" : "off"));
       frames.forEach((f, i) => (f.dataset.on = String(i < n)));
@@ -53,7 +60,7 @@ export function Manifesto() {
     update();
     addEventListener("scroll", queue, { passive: true });
     addEventListener("resize", queue);
-    return () => (removeEventListener("scroll", queue), removeEventListener("resize", queue), cancelAnimationFrame(raf));
+    return () => (io.disconnect(), removeEventListener("scroll", queue), removeEventListener("resize", queue), cancelAnimationFrame(raf));
   }, []);
 
   const total = 4 + 1 + 4 + m.body.length;

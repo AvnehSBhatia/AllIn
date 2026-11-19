@@ -714,3 +714,10 @@ main {
     animation: clk-flip 0.5s steps(5) reverse;
   }
 }
+
+/* off-screen sections skip style, layout and paint until they come near; `auto` remembers their real height after the first visit */
+main > section:nth-child(n + 3),
+#main ~ footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}

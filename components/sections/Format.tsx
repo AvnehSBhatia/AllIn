@@ -48,44 +48,17 @@ export function Format() {
   );
 }
 
-/** How many community cards are out on each street. */
-const OUT = [0, 3, 4, 5, 5];
 
 /** The day as a hand of poker.  */
 export function Streets() {
   return (
     <section id="schedule" aria-labelledby="schedule-title" className="relative px-5 py-16 md:px-10 md:py-32">
       <div className="mx-auto max-w-[1440px]">
-        <p className="eyebrow">The streets</p>
+        <p className="eyebrow">Schedule</p>
         <h2 id="schedule-title" className="h2 mt-5 max-w-[14ch]">
           The day plays out like a hand.
         </h2>
         <p className="mt-6 font-mono text-xs tracking-[0.14em] text-text-3 uppercase">Saturday, January 30 · Pleasanton, CA</p>
-
-        <ol className="relative mt-16 md:ml-[18%]">
-          <span aria-hidden className="absolute top-2 bottom-2 left-[7px] w-px bg-[linear-gradient(var(--gold),var(--hair-soft))]" />
-          {config.streets.map((s, i) => (
-            <li key={s.street} className="relative grid gap-4 pb-14 pl-10 last:pb-0 md:grid-cols-[13rem_minmax(0,1fr)_auto] md:gap-10">
-              <span aria-hidden className="absolute top-2.5 left-0 h-[15px] w-[15px] rounded-full border border-gold bg-felt-950" />
-              <div>
-                <p className="font-display text-[2rem] leading-none text-ivory italic">{s.street}</p>
-                <p className="mt-2 font-mono text-xs text-text-3">{s.time}</p>
-              </div>
-              <div className="max-w-[42ch]">
-                <h3 className="text-lg text-ivory">{s.title}</h3>
-                <p className="mt-2 text-text-2">{s.body}</p>
-              </div>
-              <div role="img" aria-label={`${OUT[i]} community cards out`} className="flex gap-1 md:pt-1">
-                {Array.from({ length: 5 }, (_, k) => (
-                  <span
-                    key={k}
-                    className={`h-7 w-5 rounded-[3px] ${k < OUT[i] ? (i === 4 ? "bg-ivory" : "bg-chip-red/90 shadow-[inset_0_0_0_2px_var(--chip-white)]") : "border border-dashed border-hair-soft"}`}
-                  />
-                ))}
-              </div>
-            </li>
-          ))}
-        </ol>
 
         <Clock />
       </div>

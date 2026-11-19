@@ -6,7 +6,7 @@ const AUTO = 0.12; // rad/s idle spin
 const GOLDEN = Math.PI * (3 - Math.sqrt(5));
 // pins, spread over every continent (decoration, not a list of where people applied); first one is the room in Pleasanton
 const PINS: [number, number][] = [
-  [37.66, -121.87], [47.6, -122.3], [30.3, -97.7], [40.7, -74], [43.7, -79.4], [19.4, -99.1], [21.3, -157.8],
+  [37.66, -121.87], [47.6, -122.3], [30.3, -97.7], [40.7, -74], [43.7, -79.4], [19.4, -99.1],
   [4.7, -74.1], [-23.5, -46.6], [-34.6, -58.4], [-33.4, -70.6],
   [51.5, -0.1], [48.9, 2.35], [52.5, 13.4], [59.3, 18.1], [40.4, -3.7], [41, 29], [55.8, 37.6],
   [6.5, 3.4], [-1.3, 36.8], [30, 31.2], [-26.2, 28], [25.2, 55.3],
@@ -54,6 +54,7 @@ export function Globe({ className = "" }: { className?: string }) {
     const n = dots.length / 3;
     const pings = PINS.map((ll, i) => ({ v: vec(ll), ph: (i * 0.37) % 1, home: i === 0 }));
 
+    const B = 10; // depth buckets for the dots
     let yaw = -2.5; // start just east of home (Pleasanton) so the beeping pin spins into view
     let pitch = 0.38;
     let vel = reduced ? 0 : AUTO;
@@ -97,17 +98,23 @@ export function Globe({ className = "" }: { className?: string }) {
       ctx.lineWidth = dpr;
       ctx.stroke();
 
+      // dots go into a few depth buckets, one path and one fill per bucket instead of ~3000 fills
       const s0 = 1.1 * dpr;
+      const paths = Array.from({ length: B + 1 }, () => new Path2D());
       for (let k = 0; k < n; k++) {
         const x0 = dots[k * 3], y0 = dots[k * 3 + 1], z0 = dots[k * 3 + 2];
         const x = x0 * cy - z0 * sy;
         const z1 = z0 * cy + x0 * sy;
         const y = y0 * cp - z1 * sp;
         const z = y0 * sp + z1 * cp;
-        const s = z > 0 ? s0 + 1.5 * dpr * z : s0;
-        ctx.globalAlpha = z > 0 ? 0.18 + 0.52 * z : 0.05;
-        ctx.fillStyle = "#f3ecda";
-        ctx.fillRect(c + x * R - s / 2, c - y * R - s / 2, s, s);
+        const b = z > 0 ? 1 + Math.min(B - 1, (z * B) | 0) : 0;
+        const s = b ? s0 + (1.5 * dpr * (b - 0.5)) / B : s0;
+        paths[b].rect(c + x * R - s / 2, c - y * R - s / 2, s, s);
+      }
+      ctx.fillStyle = "#f3ecda";
+      for (let b = 0; b <= B; b++) {
+        ctx.globalAlpha = b ? 0.18 + (0.52 * (b - 0.5)) / B : 0.05;
+        ctx.fill(paths[b]);
       }
 
       // pings on the near side
