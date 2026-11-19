@@ -59,25 +59,25 @@ export const config = {
   reach: {
     label: "ExeaLabs · Open call",
     heading: "Built anywhere. Played in one room.",
-    body: "Applications are open to high schoolers and researchers wherever they are. It's one day in Pleasanton, about 150 seats in teams of up to three, and every application is reviewed.",
+    body: "Open to high schoolers and researchers, wherever they are. One day, about 150 seats, every application read.",
     glitch: "Shuffle up and deal.",
   },
 
   manifesto: {
     lead: "Chess shows you the whole board. Poker shows you two cards and the way someone bet.",
     body: [
-      "Everything else you infer. That gap is the interesting part: acting well on partial information, against an opponent who is trying to mislead you, with a clock running.",
-      "Plain Hold'em is close enough to solved that you can download a strong bot.",
+      "The rest you infer, against someone trying to mislead you.",
+      "And plain Hold'em is nearly solved. You can download a strong bot.",
     ],
     turn: "So we changed the game.",
-    close: "You learn the rules at kickoff. You have one day to build something that plays them well, and then you explain why it works.",
+    close: "Rules at kickoff. One day to build a bot that plays them well.",
   },
 
   classified: {
     heading: "The variant is secret until kickoff.",
     body: [
-      "No-limit Texas Hold'em has been studied to death. Strong solvers are a download away, so a straight Hold'em bracket would mostly test who found the best repo.",
-      "Instead we twist the game. A custom variant, or something we invent outright. The rules arrive at kickoff with a basic baseline bot, so nobody has a head start. Your bot has to adapt.",
+      "Hold'em solvers are a download away, so a plain bracket would test who found the best repo.",
+      "So we twist the game. The rules arrive at kickoff with a baseline bot. Nobody gets a head start.",
     ],
     // These lines sit under the redaction bars. Replace them with the real rules at kickoff.
     redacted: [
