@@ -42,7 +42,7 @@ export function House() {
       <div className="mx-auto max-w-[1440px]">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div>
-            <p className="label text-text-3">The house</p>
+            <p className="eyebrow">The house</p>
             <h2 id="sponsors-title" className="h2 mt-5 max-w-[14ch]">
               Every chair is open. For now.
             </h2>

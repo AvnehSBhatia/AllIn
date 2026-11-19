@@ -7,7 +7,7 @@ export function Faq() {
     <section id="faq" aria-labelledby="faq-title" className="relative px-5 py-24 md:px-10 md:py-36">
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-24">
         <div className="lg:sticky lg:top-28 lg:self-start">
-          <p className="label text-text-3">FAQ</p>
+          <p className="eyebrow">FAQ</p>
           <h2 id="faq-title" className="h2 mt-5 max-w-[9ch]">
             Asked at the rail.
           </h2>

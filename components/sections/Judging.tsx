@@ -9,7 +9,7 @@ export function Judging() {
       <div className="mx-auto max-w-[1440px]">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end">
           <div>
-            <p className="label text-text-3">Judging</p>
+            <p className="eyebrow">Judging</p>
             <h2 id="judging-title" className="h2 mt-5 max-w-[13ch]">
               The chips are one of four things we count.
             </h2>

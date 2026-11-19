@@ -17,7 +17,7 @@ export function Reach() {
         {/* keep the heading on quiet ground */}
         <div aria-hidden className="absolute inset-0 bg-[radial-gradient(60%_55%_at_18%_78%,var(--felt-950)_10%,transparent_75%)] opacity-90" />
         <div className="relative mx-auto w-full max-w-[1440px]">
-          <p className="label text-text-2">{r.label}</p>
+          <p className="eyebrow">{r.label}</p>
           <h2 id="reach-title" className="mt-5 max-w-[14ch] font-display text-[clamp(2.6rem,5.8vw,5.5rem)] leading-[1] tracking-[-0.025em] text-ivory">
             {r.heading}
           </h2>

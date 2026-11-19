@@ -82,7 +82,7 @@ export function LiveTable() {
       <div className="mx-auto max-w-[1440px]">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>
-            <p className="label text-text-3">The bench</p>
+            <p className="eyebrow">The bench</p>
             <h2 id="lab-title" className="h2 mt-5 max-w-[16ch]">
               Two bots, one hand, and the numbers in between.
             </h2>
@@ -92,7 +92,11 @@ export function LiveTable() {
           </p>
         </div>
 
-        <div className="felt mt-14 grid grid-cols-1 overflow-hidden rounded-2xl lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
+        <div className="felt mt-14 grid grid-cols-1 overflow-hidden rounded-lg lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
+          <div className="term-bar lg:col-span-2">
+            <span><span className="text-gold">~/bench</span> $ ./heads_up --game holdem --bots 2</span>
+            <span className="hidden sm:inline">equity: monte carlo, in your browser</span>
+          </div>
           {/* table side */}
           <div className="relative flex flex-col gap-8 border-hair-soft p-5 md:p-10 lg:border-r">
             <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-5">

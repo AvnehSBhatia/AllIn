@@ -11,7 +11,7 @@ export function Prizes() {
   return (
     <section id="prizes" aria-labelledby="prizes-title" className="relative px-5 py-24 md:px-10 md:py-36">
       <div className="mx-auto max-w-[1440px]">
-        <p className="label text-text-3">Prizes</p>
+        <p className="eyebrow">Prizes</p>
         <div className="mt-5 flex flex-wrap items-end justify-between gap-6">
           <h2 id="prizes-title" className="h2 max-w-[12ch]">
             Four pots on the table.
@@ -19,7 +19,7 @@ export function Prizes() {
           <p className="font-mono text-sm tracking-[0.14em] text-gold-bright uppercase">{p.note}</p>
         </div>
 
-        <div className="felt relative mt-14 rounded-2xl px-5 pt-14 pb-8 md:px-12 md:pt-20 md:pb-12">
+        <div className="felt relative mt-14 rounded-lg px-5 pt-14 pb-8 md:px-12 md:pt-20 md:pb-12">
           <ul className="grid grid-cols-2 gap-x-6 gap-y-14 md:grid-cols-[1.5fr_1fr_1fr_1fr] md:gap-10">
             {p.items.map((it, i) => (
               <li key={it.title} className={`flex flex-col ${i === 0 ? "col-span-2 md:col-span-1" : ""}`}>

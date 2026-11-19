@@ -64,7 +64,6 @@ html {
   -webkit-text-size-adjust: 100%;
   scrollbar-color: var(--felt-600) var(--felt-950);
   scrollbar-width: thin;
-  scroll-padding-top: 72px;
 }
 
 body {
@@ -139,6 +138,28 @@ dd {
     text-transform: uppercase;
     line-height: 1.4;
   }
+  /* section prompt: "[03] the game", numbered in page order */
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--text-2);
+    text-transform: lowercase;
+  }
+  .eyebrow::before {
+    counter-increment: sec;
+    content: "[" counter(sec, decimal-leading-zero) "]";
+    color: var(--gold);
+  }
+  .eyebrow::after {
+    content: "";
+    flex: 0 1 4rem;
+    height: 1px;
+    background: var(--hair);
+  }
   .lede {
     font-size: clamp(1.05rem, 1.3vw, 1.2rem);
     line-height: 1.55;
@@ -190,10 +211,10 @@ dd {
     min-height: 48px;
     padding: 0 1.4rem;
     font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    border-radius: 6px;
     transition:
       background-color 0.3s var(--ease-out),
       color 0.3s var(--ease-out),
@@ -209,12 +230,9 @@ dd {
     cursor: not-allowed;
   }
   .btn-gold {
-    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    background: var(--gold);
     color: var(--ink);
-    box-shadow:
-      0 1px 0 rgb(255 255 255 / 0.5) inset,
-      0 -2px 0 rgb(0 0 0 / 0.18) inset,
-      0 10px 30px -12px color-mix(in oklab, var(--gold) 70%, transparent);
+    box-shadow: 0 1px 0 rgb(255 255 255 / 0.35) inset;
   }
   .btn-gold:hover {
     background: var(--gold-bright);
@@ -372,7 +390,7 @@ dd {
 }
 
 section[id] {
-  scroll-margin-top: 72px;
+  scroll-margin-top: 56px;
 }
 
 /* ---------- Hero table ---------- */
@@ -448,6 +466,40 @@ section[id] {
   opacity: 1;
 }
 
+main {
+  counter-reset: sec;
+}
+
+/* terminal window header on panels (TermBar.tsx) */
+.term-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid var(--hair-soft);
+  background: rgb(0 0 0 / 0.25);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--text-3);
+}
+
+/* scroll progress under the nav: native scroll timeline, no JS */
+.nav-progress {
+  transform: scaleX(0);
+}
+@supports (animation-timeline: scroll()) {
+  .nav-progress {
+    animation: grow linear both;
+    animation-timeline: scroll(root);
+  }
+}
+@keyframes grow {
+  to {
+    transform: scaleX(1);
+  }
+}
+
 /* entrances: one short fade-up, staggered with --i (Hero.tsx) */
 @media (prefers-reduced-motion: no-preference) {
   html {
@@ -456,6 +508,16 @@ section[id] {
   .rise {
     animation: rise 0.8s var(--ease-out) both;
     animation-delay: calc(var(--i, 0) * 70ms);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .caret {
+    animation: blink 1.1s steps(1) infinite;
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
   }
 }
 @keyframes rise {

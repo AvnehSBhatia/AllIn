@@ -49,7 +49,7 @@ export function Apply() {
       <Dither seed={3} className="absolute inset-0 h-full w-full opacity-45 [mask-image:radial-gradient(60%_70%_at_20%_60%,#000,transparent)]" />
       <div className="relative mx-auto grid max-w-[1440px] grid-cols-1 gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-24">
         <div className="relative">
-          <p className="label text-text-3">Apply</p>
+          <p className="eyebrow">Apply</p>
           <h2 id="apply-title" className="h2 mt-5 text-[clamp(2.8rem,6vw,5.25rem)]">
             {a.heading}
           </h2>
@@ -58,20 +58,24 @@ export function Apply() {
         </div>
 
         {config.applyUrl ? (
-          <div className="felt flex flex-col items-start justify-center gap-6 rounded-2xl p-8 md:p-12">
+          <div className="felt flex flex-col items-start justify-center gap-6 rounded-lg p-8 md:p-12">
             <p className="text-text-2">Applications run through our form.</p>
             <a href={config.applyUrl} className="btn btn-gold" target="_blank" rel="noopener">
               Open the application <ArrowUpRight size={16} strokeWidth={1.5} />
             </a>
           </div>
         ) : state === "done" ? (
-          <div className="felt flex flex-col justify-center rounded-2xl p-8 md:p-12" role="status">
+          <div className="felt flex flex-col justify-center rounded-lg p-8 md:p-12" role="status">
             <p className="label text-gold-bright">Received</p>
             <p className="h3 mt-4 text-ivory">Your chips are on the table.</p>
             <p className="mt-3 max-w-[40ch] text-text-2">A person reads every application. You&apos;ll hear back by email once decisions go out.</p>
           </div>
         ) : (
-          <form noValidate onSubmit={submit} className="felt grid gap-6 rounded-2xl p-6 md:grid-cols-2 md:p-10">
+          <form noValidate onSubmit={submit} className="felt grid gap-6 rounded-lg p-6 md:grid-cols-2 md:p-10">
+            <div className="term-bar -mx-6 -mt-6 rounded-t-lg md:col-span-2 md:-mx-10 md:-mt-10">
+              <span><span className="text-gold">~/allin</span> $ ./apply</span>
+              <span>read by a person</span>
+            </div>
             <label className="block">
               <span className="label text-text-2">Name</span>
               <input name="name" autoComplete="name" className={field} {...aria("name")} />

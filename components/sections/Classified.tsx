@@ -11,7 +11,7 @@ export function Classified() {
     <section id="game" aria-labelledby="game-title" className="relative overflow-x-clip px-5 py-24 md:px-10 md:py-36">
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-20">
         <div className="lg:pt-16">
-          <p className="label text-text-3">The game</p>
+          <p className="eyebrow">The game</p>
           <h2 id="game-title" className="h2 mt-5 max-w-[12ch]">
             {c.heading}
           </h2>

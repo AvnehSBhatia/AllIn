@@ -6,7 +6,7 @@ export function Workshops() {
     <section id="talks" aria-labelledby="talks-title" className="relative px-5 py-24 md:px-10 md:py-28">
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
         <div>
-          <p className="label text-text-3">Talks and workshops</p>
+          <p className="eyebrow">Talks and workshops</p>
           <h2 id="talks-title" className="h3 mt-5 max-w-[20ch] text-[clamp(2rem,3.6vw,3.2rem)]">
             Between hands, people who do this for a living talk shop.
           </h2>

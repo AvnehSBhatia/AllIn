@@ -68,10 +68,10 @@ export function Hero() {
 
       <div className="relative z-[4] order-1 mx-auto flex w-full max-w-[1440px] flex-col px-5 pt-28 md:px-10 lg:min-h-[max(100svh,760px)] lg:justify-center lg:pt-24 lg:pb-16">
         <div className="lg:max-w-[45%] xl:max-w-[42%]">
-          <p {...rise(0)} className="rise flex items-center gap-3">
-            <span className="text-[1.05rem] font-semibold tracking-[-0.01em] text-ivory">{config.organizer}</span>
-            <span aria-hidden className="h-4 w-px bg-hair" />
-            <span className="label text-text-2">The Algorithmic Tournament</span>
+          <p {...rise(0)} className="rise font-mono text-[13px] text-text-2">
+            <span className="text-gold">{config.organizer.toLowerCase()}@allin</span>
+            <span className="text-text-3">:~$</span> ./the-algorithmic-tournament
+            <span aria-hidden className="caret ml-1 inline-block h-[1.05em] w-[0.55em] translate-y-[0.18em] bg-gold/80" />
           </p>
           <h1 id="hero-title" {...rise(1)} className="rise mt-5 font-display text-[clamp(4.4rem,16vw,6.75rem)] leading-[0.88] tracking-[-0.03em] text-ivory lg:text-[clamp(6rem,9vw,9rem)]">
             ALL <em className="not-italic lg:italic">IN</em>

@@ -23,7 +23,7 @@ export function Format() {
     <section id="format" aria-labelledby="format-title" className="relative px-5 py-24 md:px-10 md:py-32">
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-24">
         <div className="lg:sticky lg:top-28 lg:self-start">
-          <p className="label text-text-3">House rules</p>
+          <p className="eyebrow">House rules</p>
           <h2 id="format-title" className="h2 mt-5 max-w-[10ch]">
             What we can tell you now.
           </h2>
@@ -55,7 +55,7 @@ export function Streets() {
   return (
     <section id="schedule" aria-labelledby="schedule-title" className="relative px-5 py-24 md:px-10 md:py-32">
       <div className="mx-auto max-w-[1440px]">
-        <p className="label text-text-3">The streets</p>
+        <p className="eyebrow">The streets</p>
         <h2 id="schedule-title" className="h2 mt-5 max-w-[14ch]">
           The day plays out like a hand.
         </h2>

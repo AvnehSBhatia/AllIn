@@ -10,7 +10,7 @@ export function Manifesto() {
       <Dither seed={2} className="absolute inset-0 h-full w-full opacity-40 [mask-image:radial-gradient(70%_60%_at_80%_50%,#000,transparent)]" />
       <div className="relative mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-20">
         <div>
-          <p className="label mb-8 text-text-3">Why poker, and why not plain Hold&apos;em</p>
+          <p className="eyebrow mb-8">Why poker, and why not plain Hold&apos;em</p>
           <p className="max-w-[18ch] font-display text-[clamp(2.1rem,4vw,3.8rem)] leading-[1.08] tracking-[-0.02em] text-ivory">
             <span className="block">{l1}</span>
             <span className="block">{l2}</span>
