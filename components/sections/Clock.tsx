@@ -53,8 +53,9 @@ const ROW = "grid grid-cols-[2.25rem_4.75rem_1fr_auto] items-center gap-x-3 px-4
 
 /**
  * Run of show as a tournament clock: a countdown to doors, then the blind-structure sheet.
- * ← / → (or swipe, the buttons, or a tap on a row) steps through the levels one at a time, stop-motion:
- * the sheet slides to keep the level in view and a chip lands on the stack for each one. The page scrolls normally.
+ * Scrolling steps through the levels one at a time (the clock pins where the screen is tall enough), and so do
+ * ← / →, a sideways swipe, the buttons, or a tap on a row. Stop-motion:
+ * the sheet slides to keep the level in view and a chip lands on the stack for each one.
  */
 export function Clock() {
   const [now, setNow] = useState<number | null>(null);
@@ -106,6 +107,7 @@ export function Clock() {
   const L = LEVELS[k];
   return (
     <div ref={ref} className="clk mt-10 md:mt-12 lg:ml-[18%]">
+      <div data-stick className="clk-stick">
       <div className="felt flex flex-col overflow-hidden rounded-lg lg:h-[min(760px,calc(100svh-140px))] land:h-[calc(100svh-72px)]">
         <div className="term-bar">
           <span>
@@ -114,7 +116,7 @@ export function Clock() {
           <span className="hidden sm:inline">sat jan 30 · pleasanton, ca</span>
         </div>
 
-        <div className="grid min-h-0 flex-1 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] land:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+        <div className="grid min-h-0 flex-1 grid-rows-[auto_minmax(0,1fr)] lg:grid-rows-1 land:grid-rows-1 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] land:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
           {/* the clock */}
           <div className="flex flex-col justify-between gap-5 border-b border-hair-soft p-5 md:p-10 lg:border-r lg:border-b-0 land:gap-3 land:border-r land:border-b-0 land:p-4">
             <div className="flex items-center justify-between gap-4 lg:flex-1 lg:flex-col lg:items-stretch">
@@ -184,6 +186,7 @@ export function Clock() {
             <Stepper i={k} count={LEVELS.length} go={go} word="lvl" label={(n) => `Level ${n + 1}: ${LEVELS[n].t}, ${LEVELS[n].what}`} className="border-t border-hair-soft bg-black/15 px-3 py-1 md:px-5 land:py-0" />
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

@@ -588,6 +588,48 @@ main {
     min-height: min(78svh, 820px);
   }
 }
+/* pinned mode (keep in sync with PIN_Q in hooks/useStepper.ts): the stage sticks and scroll steps the frames */
+@media (prefers-reduced-motion: no-preference) and (min-height: 560px) {
+  .mf {
+    height: 320svh;
+  }
+  .mf-stick {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+  }
+  .mf-track {
+    flex: 1;
+    min-height: 0;
+  }
+  .mf-slide,
+  .mf-mid {
+    align-items: center;
+    max-height: none;
+  }
+  .mf-ctrl {
+    padding-top: 0.5rem;
+    padding-bottom: 1.25rem;
+  }
+  .clk {
+    height: 340svh;
+  }
+  .clk-stick {
+    position: sticky;
+    top: 64px;
+    height: min(calc(100svh - 80px), 880px);
+  }
+  .clk-stick > .felt {
+    height: 100%;
+  }
+  .clk-win {
+    height: auto;
+    flex: 1;
+    min-height: 0;
+  }
+}
 @media (prefers-reduced-motion: no-preference) {
   .mf-slide {
     transition:
@@ -715,7 +757,7 @@ main {
 
 /* chip stack in the tournament clock (Clock.tsx sets --a and data-on). Reduced motion: no stepping, just the result. */
 .stk {
-  --dz: 6px;
+  --dz: 3.5px;
   transform-style: preserve-3d;
   transform: rotateX(62deg) rotateZ(var(--a, -20deg));
 }
