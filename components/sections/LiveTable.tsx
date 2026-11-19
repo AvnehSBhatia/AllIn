@@ -88,7 +88,7 @@ export function LiveTable() {
             </h2>
           </div>
           <p className="lede lg:max-w-[30rem]">
-            This is plain Hold&apos;em, the solved game, shown so you can see what a bot actually sees. Equity is computed in your browser on every street. Your variant will break half of these assumptions.
+            Plain Hold&apos;em, so you can see what a bot sees. Your variant will break half of it.
           </p>
         </div>
 

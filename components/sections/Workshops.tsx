@@ -10,7 +10,7 @@ export function Workshops() {
           <h2 id="talks-title" className="h3 mt-5 max-w-[20ch] text-[clamp(2rem,3.6vw,3.2rem)]">
             Between hands, people who do this for a living talk shop.
           </h2>
-          <p className="mt-5 max-w-[40ch] text-text-2">Two workshops run in the afternoon while the leaderboard keeps going. Speakers are being confirmed. We list names only once they say yes.</p>
+          <p className="mt-5 max-w-[40ch] text-text-2">Two afternoon workshops. Speakers announced once confirmed.</p>
         </div>
 
         <ul className="ws-list grid gap-3 [perspective:900px]">

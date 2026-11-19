@@ -68,7 +68,7 @@ export function Apply() {
           <div className="felt flex flex-col justify-center rounded-lg p-8 md:p-12" role="status">
             <p className="label text-gold-bright">Received</p>
             <p className="h3 mt-4 text-ivory">Your chips are on the table.</p>
-            <p className="mt-3 max-w-[40ch] text-text-2">A person reads every application. You&apos;ll hear back by email once decisions go out.</p>
+            <p className="mt-3 max-w-[40ch] text-text-2">You&apos;ll hear back by email.</p>
           </div>
         ) : (
           <form noValidate onSubmit={submit} className="felt grid gap-6 rounded-lg p-6 md:grid-cols-2 md:p-10">

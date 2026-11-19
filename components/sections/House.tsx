@@ -49,7 +49,7 @@ export function House() {
           </div>
           <div className="max-w-[26rem]">
             <p className="text-text-2">
-              Sponsors and co-hosts are being confirmed. We put a name on a seat when it&apos;s signed, and not before.
+              Sponsors are being confirmed. Names go up once signed.
             </p>
             {email ? (
               <a href={`mailto:${email}?subject=ALL%20IN%20sponsorship`} className="btn btn-ghost mt-6">

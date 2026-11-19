@@ -2,20 +2,15 @@ import { config } from "@/lib/config";
 import { Clock } from "./Clock";
 
 const RULES: [string, string, string?][] = [
-  ["Length", config.durationLabel, "Kickoff to awards, same day"],
-  ["Format", config.format, "One day, no overnight"],
-  ["Seats", `About ${config.capacity}`, "Selective. Applications are read"],
-  ["Who", "High schoolers and researchers"],
+  ["Length", config.durationLabel],
+  ["Format", config.format],
+  ["Seats", `About ${config.capacity}`],
   ["When", config.date ? new Date(config.date).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", timeZone: "America/Los_Angeles" }) : config.dateWindow, config.date ? "8:30 AM to 8:30 PM" : "Date TBA"],
   ["Where", config.venue ?? "TBA", config.venueCity ?? undefined],
-  ["Team size", `Up to ${config.teamSize}`, "About 50 teams"],
+  ["Team size", `Up to ${config.teamSize}`],
   ["Hosts", [config.organizer, ...config.coHosts].join(" × ")],
-  ["Languages", "TBA", "Announced with the engine API"],
   ["Cost", "TBA"],
   ["Food", config.food],
-  ["Talks", "Two workshops in the afternoon"],
-  ["Winner", "Live leaderboard, then a playoff bracket"],
-  ["Chips", "Virtual. Always"],
 ];
 
 /** House rules, written like the card taped to the side of a cash table. */
@@ -28,7 +23,7 @@ export function Format() {
           <h2 id="format-title" className="h2 mt-5 max-w-[10ch]">
             What we can tell you now.
           </h2>
-          <p className="lede mt-6">Anything marked TBA is undecided, not hidden. We fill it in the moment it is.</p>
+          <p className="lede mt-6">TBA means undecided, not hidden.</p>
         </div>
 
         <dl className="border-t border-hair">

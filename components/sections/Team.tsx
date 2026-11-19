@@ -12,7 +12,7 @@ export function Team() {
         <h2 id="team-title" className="h3 mt-5 max-w-[22ch] text-[clamp(2rem,3.6vw,3.2rem)]">
           The house, and their very official titles.
         </h2>
-        <p className="mt-5 max-w-[46ch] text-text-2">Run by ExeaLabs with YRI. Here&apos;s who is dealing the cards, and what their titles mean in plain English.</p>
+        <p className="mt-5 max-w-[46ch] text-text-2">Run by ExeaLabs with YRI.</p>
 
         <ul className="mt-12 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {config.team.map((m, i) => {

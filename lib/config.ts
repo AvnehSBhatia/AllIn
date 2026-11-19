@@ -106,13 +106,13 @@ export const config = {
   ] as [string, string][],
 
   judging: {
-    intro: "Win rate matters. It isn't the whole score. This rewards people who think fast, prove their work in a short window, and can explain it under pressure.",
+    intro: "Win rate matters, but it isn't the whole score.",
     note: "Weights TBA. The order above is not a ranking.",
     criteria: [
-      { hand: "Royal flush", cards: ["A♠", "K♠", "Q♠", "J♠", "T♠"], title: "Bot performance", body: "Where your bot finishes: the live leaderboard, then the playoff bracket." },
-      { hand: "Straight flush", cards: ["9♥", "8♥", "7♥", "6♥", "5♥"], title: "Novelty of approach", body: "Did you try something that isn't the obvious baseline? Interesting failures count." },
-      { hand: "Four of a kind", cards: ["Q♦", "Q♣", "Q♥", "Q♠", "4♦"], title: "Progress in a day", body: "Where you started at kickoff, where you ended. Show the iterations." },
-      { hand: "Full house", cards: ["J♣", "J♦", "J♠", "3♥", "3♣"], title: "Demo", body: "A short demo to the judges. Clear idea, honest results, good answers to hard questions." },
+      { hand: "Royal flush", cards: ["A♠", "K♠", "Q♠", "J♠", "T♠"], title: "Bot performance", body: "Leaderboard, then the playoff bracket." },
+      { hand: "Straight flush", cards: ["9♥", "8♥", "7♥", "6♥", "5♥"], title: "Novelty of approach", body: "Beyond the obvious baseline. Interesting failures count." },
+      { hand: "Four of a kind", cards: ["Q♦", "Q♣", "Q♥", "Q♠", "4♦"], title: "Progress in a day", body: "Kickoff to code freeze. Show the iterations." },
+      { hand: "Full house", cards: ["J♣", "J♦", "J♠", "3♥", "3♣"], title: "Demo", body: "Clear idea, honest results, good answers." },
     ],
   },
 
@@ -157,17 +157,17 @@ export const config = {
   },
 
   faq: [
-    { q: "Who can apply?", a: "High schoolers and researchers. If you can write code and you're curious about game theory or AI, apply. Applications are reviewed." },
-    { q: "How big are teams?", a: "Up to three people. With about 150 seats, that's around 50 teams." },
-    { q: "How is the winner decided?", a: "Teams train and resubmit bots to a live leaderboard all day. After code freeze, a playoff bracket seats about six bots a table and the top two advance until one bot is left. Most technical and Most unique are judged separately." },
+    { q: "Who can apply?", a: "High schoolers and researchers who can code." },
+    { q: "How big are teams?", a: "Up to three people. About 50 teams." },
+    { q: "How is the winner decided?", a: "A live leaderboard all day, then a playoff bracket until one bot is left. Most technical and Most unique are judged separately." },
     { q: "How much does it cost?", a: "TBA." },
-    { q: "What skills do I need?", a: "Comfort programming in at least one language. Some probability helps. You don't need to know poker theory; the variant is new to everyone." },
-    { q: "Which languages can we use?", a: "TBA. The engine API and language rules will be announced before the event." },
-    { q: "Where and when?", a: "Saturday, January 30, 2027, at Zoho HQ in Pleasanton, CA. One day, no overnight: doors open 8:30 AM and close 8:30 PM. Co-hosted with YRI." },
-    { q: "What should I bring?", a: "A laptop, charger, and anything you need to work for a full day. Lunch and dinner are provided." },
-    { q: "What's the research component?", a: "Win rate is one of four judging criteria. The other three are novelty, progress made during the day and a short demo. Two workshops run in the afternoon." },
-    { q: "Is there gambling?", a: "No. Virtual chips only. No real-money gambling. This is a game-theory and AI competition." },
-    { q: "How does selection work?", a: "We review every application and aim for about 150 people. Tell us what you've built and why this interests you. That matters more than credentials." },
+    { q: "What skills do I need?", a: "One programming language. Some probability helps. No poker theory needed; the variant is new to everyone." },
+    { q: "Which languages can we use?", a: "TBA, announced with the engine API." },
+    { q: "Where and when?", a: "Saturday, January 30, 2027, Zoho HQ, Pleasanton, CA. 8:30 AM to 8:30 PM." },
+    { q: "What should I bring?", a: "A laptop and charger. Lunch and dinner are on us." },
+    { q: "What's the research component?", a: "Win rate is one of four criteria, with novelty, progress and a demo." },
+    { q: "Is there gambling?", a: "No. Virtual chips only." },
+    { q: "How does selection work?", a: "We read every application. What you've built matters more than credentials." },
   ],
 
   apply: {
@@ -176,7 +176,7 @@ export const config = {
     deadline: null as string | null, // TBA
   },
 
-  safety: "Virtual chips only. No real-money gambling. This is a game-theory and AI competition.",
+  safety: "Virtual chips only. No real-money gambling.",
 };
 
 export type Config = typeof config;
