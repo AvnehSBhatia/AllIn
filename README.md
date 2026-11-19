@@ -55,6 +55,8 @@ The script writes one PNG per width and prints any horizontal overflow and conso
 ## Motion
 Kept small on purpose. The hero fades in, and its table deals hands to eight bot laptops whose screens show each decision. A dithered light (`components/motion/Dither.tsx`) sways slowly behind the hero, Reach, Why poker and Apply; it draws at 20fps on a tiny canvas. The bench deals one hand at a time. Everything stops when it scrolls out of view, and all of it is under `prefers-reduced-motion`.
 
+The reel after the hero and the schedule clock step frame by frame (`hooks/useStepper.ts`). Scrolling drives them where the screen is tall enough (they pin while you scroll through); left/right arrow keys, a sideways swipe and the prev/next buttons also work and scroll the page to that frame. Short screens (a phone held sideways) and reduced motion skip the pinning and step with keys, swipes and buttons.
+
 ## Still TBA
 These are undecided, so the site says TBA rather than guessing:
 - Exact date (late January or early February) and kickoff time.
