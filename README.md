@@ -6,7 +6,7 @@ Built with Next.js 16 (App Router), TypeScript in strict mode, Tailwind v4 and a
 
 ## How the page works
 
-- **The way in.** The first screen is a filmed camera move from above the table down onto the felt, cut into 149 stills in `public/intro/`. On large screens the first screen is pinned and scrolling scrubs the stills on a canvas (`components/sections/Hero.tsx`). Phones, narrow windows and reduced motion get the opening frame as a still, with the pitch as an ordinary block under it.
+- **The way in.** The first screen is a filmed camera move from above the table down onto the felt, cut into 119 stills in `public/intro/` (4.5 MB, loaded after the page itself). On large screens the first screen is pinned and scrolling scrubs the stills on a canvas (`components/sections/Hero.tsx`). Phones, narrow windows and reduced motion get the opening frame as a still, with the pitch as an ordinary block under it.
 - **Re-cutting the film.** `scripts/intro-frames.sh take.mp4 [frames] [width]` (needs `ffmpeg` and `cwebp`), then set `FRAMES` in `lib/intro.ts`. The current take was generated with Wan 3.0 from two anchor stills of our own table, so the layout and the E X E A 1 board are ours.
 - **Sections.** After the hero the page scrolls normally. Each section's entrance plays once when it arrives (`components/deck/Deck.tsx`, anime.js). Left and right arrow keys step between sections.
 - **Look.** One fixed lamp and one fixed vignette for the whole page (`.room` in `app/globals.css`), so sections never show a seam. Gold is satin and flat. Cards carry their own stains (`lib/stain.ts`).

@@ -22,6 +22,7 @@ export function Deck({ ids }: { ids: string[] }) {
     const els = ids.map((id) => document.getElementById(id)).filter((e): e is HTMLElement => !!e);
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     let at = 0;
+    const watchers: IntersectionObserver[] = [];
 
     const enter = (sec: HTMLElement) => {
       const cs = (el: Element, v: string) => getComputedStyle(el).getPropertyValue(v);
@@ -43,10 +44,15 @@ export function Deck({ ids }: { ids: string[] }) {
         const n = { v: 0 };
         animate(n, { v: to, duration: 1300, delay: 1150 + k * 160, ease: "outExpo", onUpdate: () => (el.textContent = "$" + Math.round(n.v).toLocaleString("en-US")) });
       });
-      // once they have landed, the props drift a little, each on its own clock
-      sec.querySelectorAll<HTMLElement>(".prop").forEach((el, k) => {
-        animate(el.firstElementChild!, { translateY: [0, k % 2 ? 6 : -6], duration: 4200 + k * 700, delay: 1800 + k * 150, ease: "inOutSine", loop: true, alternate: true });
-      });
+      // once they have landed, the props drift a little, each on its own clock, and only while their section is on screen
+      const drift = [...sec.querySelectorAll<HTMLElement>(".prop")].map((el, k) =>
+        animate(el.firstElementChild!, { translateY: [0, k % 2 ? 6 : -6], duration: 4200 + k * 700, delay: 1800 + k * 150, ease: "inOutSine", loop: true, alternate: true }),
+      );
+      if (drift.length) {
+        const seen = new IntersectionObserver(([e]) => drift.forEach((d) => (e.isIntersecting ? d.resume() : d.pause())));
+        seen.observe(sec);
+        watchers.push(seen);
+      }
     };
 
     let stopArrive = () => {};
@@ -100,6 +106,7 @@ export function Deck({ ids }: { ids: string[] }) {
 
     return () => {
       stopArrive();
+      watchers.forEach((w) => w.disconnect());
       current.disconnect();
       removeEventListener("keydown", key);
       removeEventListener("pointermove", move);

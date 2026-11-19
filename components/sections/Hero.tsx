@@ -1,7 +1,7 @@
 "use client";
 import { Fragment, useEffect, useRef } from "react";
 import { config } from "@/lib/config";
-import { FRAMES, frameSrc } from "@/lib/intro";
+import { FRAMES, POSTER_SMALL, frameSrc } from "@/lib/intro";
 
 const FACTS = [
   ["When", config.date ? new Date(config.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/Los_Angeles" }) : config.dateWindow],
@@ -62,7 +62,12 @@ export function Hero() {
           () => pump(),
         );
       };
-      for (let k = 0; k < 6; k++) pump();
+      // the film waits for the page: fonts and the opening frame come first, then stills four at a time
+      const start = () => {
+        for (let k = 0; k < 4; k++) pump();
+      };
+      if (document.readyState === "complete") start();
+      else addEventListener("load", start, { once: true });
 
       // canvas backing store follows the screen, capped so a 5K display doesn't fill 14M pixels a frame
       let cw = 0;
@@ -123,6 +128,7 @@ export function Hero() {
 
       teardown = () => {
         alive = false;
+        removeEventListener("load", start);
         clearInterval(poll);
         cancelAnimationFrame(raf);
         io.disconnect();
@@ -148,7 +154,7 @@ export function Hero() {
       <div className="hero-stick">
         {/* the opening frame is a plain image, so it is there before any script runs; the canvas paints over it */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={frameSrc(0)} alt="" fetchPriority="high" className="hero-poster" />
+        <img src={frameSrc(0)} srcSet={`${POSTER_SMALL} 800w, ${frameSrc(0)} 1440w`} sizes="100vw" alt="" fetchPriority="high" decoding="async" className="hero-poster" />
         <canvas ref={canvas} aria-hidden className="hero-canvas" />
         <div aria-hidden className="hero-shade" />
         <div aria-hidden className="hero-dim" />
