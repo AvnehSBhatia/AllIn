@@ -9,7 +9,7 @@ const CELL = 6; // CSS px per dither pixel
 
 /**
  * A gradient drawn as ordered dither on a tiny canvas, scaled up with hard pixels.
- * The light sways slowly on its own. Draws at 20fps, only while on screen; one still frame under reduced motion.
+ * The light sways slowly on its own. Draws at ~8fps, only while on screen; one still frame under reduced motion.
  * `seed` shifts the phase so two sections never sway in step.
  */
 export function Dither({ seed = 0, className = "" }: { seed?: number; className?: string }) {
@@ -64,8 +64,8 @@ export function Dither({ seed = 0, className = "" }: { seed?: number; className?
 
     let last = 0;
     const loop = (now: number) => {
-      // ponytail: 20fps; the hard pixels hide it and it costs a third of 60
-      if (now - last > 48) {
+      // ponytail: ~8fps; the sway takes 40s and the hard pixels step anyway, so more frames only cost CPU
+      if (now - last > 120) {
         last = now;
         draw(now / 1000);
       }

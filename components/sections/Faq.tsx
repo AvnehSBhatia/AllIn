@@ -4,7 +4,7 @@ import { config } from "@/lib/config";
 /** Native <details>: keyboard, find-in-page and no-JS all work for free. */
 export function Faq() {
   return (
-    <section id="faq" aria-labelledby="faq-title" className="relative px-5 py-24 md:px-10 md:py-36">
+    <section id="faq" aria-labelledby="faq-title" className="relative px-5 py-16 md:px-10 md:py-36">
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-24">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <p className="eyebrow">FAQ</p>

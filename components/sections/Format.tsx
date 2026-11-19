@@ -1,10 +1,11 @@
 import { config } from "@/lib/config";
+import { Clock } from "./Clock";
 
 const RULES: [string, string, string?][] = [
   ["Length", config.durationLabel, "Kickoff to awards, same day"],
   ["Format", config.format, "One day, no overnight"],
   ["Seats", `About ${config.capacity}`, "Selective. Applications are read"],
-  ["Who", "Undergrads and researchers"],
+  ["Who", "High schoolers and researchers"],
   ["When", config.date ? new Date(config.date).toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric", timeZone: "America/Los_Angeles" }) : config.dateWindow, config.date ? "8:30 AM to 8:30 PM" : "Date TBA"],
   ["Where", config.venue ?? "TBA", config.venueCity ?? undefined],
   ["Team size", `Up to ${config.teamSize}`, "About 50 teams"],
@@ -20,7 +21,7 @@ const RULES: [string, string, string?][] = [
 /** House rules, written like the card taped to the side of a cash table. */
 export function Format() {
   return (
-    <section id="format" aria-labelledby="format-title" className="relative px-5 py-24 md:px-10 md:py-32">
+    <section id="format" aria-labelledby="format-title" className="relative px-5 py-16 md:px-10 md:py-32">
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-24">
         <div className="lg:sticky lg:top-28 lg:self-start">
           <p className="eyebrow">House rules</p>
@@ -53,7 +54,7 @@ const OUT = [0, 3, 4, 5, 5];
 /** The day as a hand of poker.  */
 export function Streets() {
   return (
-    <section id="schedule" aria-labelledby="schedule-title" className="relative px-5 py-24 md:px-10 md:py-32">
+    <section id="schedule" aria-labelledby="schedule-title" className="relative px-5 py-16 md:px-10 md:py-32">
       <div className="mx-auto max-w-[1440px]">
         <p className="eyebrow">The streets</p>
         <h2 id="schedule-title" className="h2 mt-5 max-w-[14ch]">
@@ -86,17 +87,7 @@ export function Streets() {
           ))}
         </ol>
 
-        <div className="mt-20 md:ml-[18%]">
-          <h3 className="label text-text-3">Run of show</h3>
-          <dl className="mt-4 grid border-t border-hair-soft sm:grid-cols-2 sm:gap-x-12">
-            {config.schedule.map(([t, what]) => (
-              <div key={t + what} className="grid grid-cols-[6.5rem_1fr] items-baseline border-b border-hair-soft py-3">
-                <dt className="font-mono text-[13px] text-gold-bright">{t}</dt>
-                <dd className="text-ivory">{what}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+        <Clock />
       </div>
     </section>
   );

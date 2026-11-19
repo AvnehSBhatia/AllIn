@@ -78,7 +78,7 @@ export function LiveTable() {
   const pts = eq.slice(0, street + 1).map((v, i) => `${x(i)},${y(v)}`);
 
   return (
-    <section ref={ref} id="lab" aria-labelledby="lab-title" className="relative px-5 py-24 md:px-10 md:py-32">
+    <section ref={ref} id="lab" aria-labelledby="lab-title" className="relative px-5 py-16 md:px-10 md:py-32">
       <div className="mx-auto max-w-[1440px]">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
           <div>

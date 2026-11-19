@@ -18,14 +18,14 @@ export function Footer() {
             <ul className="grid grid-cols-2 gap-x-10 gap-y-3 font-mono text-xs tracking-[0.14em] uppercase">
               {[...config.nav, { label: "Apply", href: "#apply" }].map((n) => (
                 <li key={n.href}>
-                  <a href={n.href} className="link text-text-2 hover:text-ivory">
+                  <a href={n.href} className="link inline-flex min-h-10 items-center text-text-2 hover:text-ivory md:min-h-0">
                     {n.label}
                   </a>
                 </li>
               ))}
               {config.socials.map((s) => (
                 <li key={s.href}>
-                  <a href={s.href} className="link text-text-2 hover:text-ivory" rel="noopener" target="_blank">
+                  <a href={s.href} className="link inline-flex min-h-10 items-center text-text-2 hover:text-ivory md:min-h-0" rel="noopener" target="_blank">
                     {s.label}
                   </a>
                 </li>

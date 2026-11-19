@@ -45,7 +45,7 @@ export function Apply() {
   const aria = (k: string) => ({ "aria-invalid": !!errors[k], "aria-describedby": errors[k] ? `${k}-err` : undefined });
 
   return (
-    <section id="apply" aria-labelledby="apply-title" className="relative overflow-clip px-5 py-24 md:px-10 md:py-36">
+    <section id="apply" aria-labelledby="apply-title" className="relative overflow-clip px-5 py-16 md:px-10 md:py-36">
       <Dither seed={3} className="absolute inset-0 h-full w-full opacity-45 [mask-image:radial-gradient(60%_70%_at_20%_60%,#000,transparent)]" />
       <div className="relative mx-auto grid max-w-[1440px] grid-cols-1 gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-24">
         <div className="relative">
@@ -95,7 +95,7 @@ export function Apply() {
               <legend className="label text-text-2">You are</legend>
               <div className="mt-2 flex flex-wrap gap-2">
                 {[
-                  ["undergrad", "Undergrad"],
+                  ["highschool", "High schooler"],
                   ["researcher", "Researcher"],
                   ["other", "Other"],
                 ].map(([v, l]) => (

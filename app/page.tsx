@@ -1,6 +1,5 @@
 import { Nav } from "@/components/ui/Nav";
 import { Hero } from "@/components/sections/Hero";
-import { Reach } from "@/components/sections/Reach";
 import { Manifesto } from "@/components/sections/Manifesto";
 import { Classified } from "@/components/sections/Classified";
 import { LiveTable } from "@/components/sections/LiveTable";
@@ -9,6 +8,7 @@ import { Judging } from "@/components/sections/Judging";
 import { Prizes } from "@/components/sections/Prizes";
 import { Workshops } from "@/components/sections/Workshops";
 import { House } from "@/components/sections/House";
+import { Team } from "@/components/sections/Team";
 import { Faq } from "@/components/sections/Faq";
 import { Apply } from "@/components/sections/Apply";
 import { Footer } from "@/components/sections/Footer";
@@ -19,7 +19,6 @@ export default function Home() {
       <Nav />
       <main id="main">
         <Hero />
-        <Reach />
         <Manifesto />
         <Classified />
         <LiveTable />
@@ -29,6 +28,7 @@ export default function Home() {
         <Prizes />
         <Workshops />
         <House />
+        <Team />
         <Faq />
         <Apply />
       </main>

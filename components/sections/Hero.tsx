@@ -70,7 +70,7 @@ export function Hero() {
         <div className="lg:max-w-[45%] xl:max-w-[42%]">
           <p {...rise(0)} className="rise font-mono text-[13px] text-text-2">
             <span className="text-gold">{config.organizer.toLowerCase()}@allin</span>
-            <span className="text-text-3">:~$</span> ./the-algorithmic-tournament
+            <span className="text-text-3">:~$</span> ./<span className="hidden sm:inline">the-algorithmic-</span>tournament
             <span aria-hidden className="caret ml-1 inline-block h-[1.05em] w-[0.55em] translate-y-[0.18em] bg-gold/80" />
           </p>
           <h1 id="hero-title" {...rise(1)} className="rise mt-5 font-display text-[clamp(4.4rem,16vw,6.75rem)] leading-[0.88] tracking-[-0.03em] text-ivory lg:text-[clamp(6rem,9vw,9rem)]">
@@ -96,7 +96,7 @@ export function Hero() {
             <a href={config.applyUrl || "#apply"} className="btn btn-gold">
               Apply for a seat
             </a>
-            <a href="#game" className="link font-mono text-[12px] tracking-[0.14em] text-text-2 uppercase hover:text-ivory">
+            <a href="#game" className="link inline-flex min-h-11 items-center font-mono text-[12px] tracking-[0.14em] text-text-2 uppercase hover:text-ivory">
               Read the game
             </a>
           </div>

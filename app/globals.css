@@ -500,6 +500,112 @@ main {
   }
 }
 
+/* Glitch cut inside the reel (Manifesto.tsx toggles .is-on). Reduced motion: the line just sits there. */
+@layer comp {
+  .glitch {
+    position: relative;
+  }
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    margin-inline: auto;
+    max-width: inherit;
+    opacity: 0;
+    pointer-events: none;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+  .glitch.is-on {
+    animation: gl-main 0.45s steps(1) both;
+  }
+  .glitch.is-on::before {
+    color: var(--chip-red);
+    animation: gl-a 0.45s steps(1) both;
+  }
+  .glitch.is-on::after {
+    color: var(--chip-blue);
+    animation: gl-b 0.45s steps(1) both;
+  }
+  }
+}
+@keyframes gl-main {
+  0% { opacity: 0; }
+  6% { opacity: 1; transform: translateX(3px) skewX(4deg); }
+  14% { opacity: 0.6; transform: translateX(-2px); }
+  22% { opacity: 1; transform: none; }
+  48% { transform: translateX(3px); }
+  54%, 100% { transform: none; opacity: 1; }
+}
+@keyframes gl-a {
+  0% { opacity: 0.55; clip-path: inset(8% 0 72% 0); transform: translateX(-4px); }
+  18% { clip-path: inset(58% 0 12% 0); transform: translateX(4px); }
+  36% { clip-path: inset(30% 0 48% 0); transform: translateX(-2px); }
+  54% { clip-path: inset(80% 0 4% 0); transform: translateX(2px); }
+  72% { clip-path: inset(0 0 88% 0); transform: translateX(-1px); }
+  90%, 100% { opacity: 0; }
+}
+@keyframes gl-b {
+  0% { opacity: 0.55; clip-path: inset(66% 0 10% 0); transform: translateX(4px); }
+  20% { clip-path: inset(12% 0 70% 0); transform: translateX(-3px); }
+  40% { clip-path: inset(44% 0 36% 0); transform: translateX(2px); }
+  62% { clip-path: inset(4% 0 82% 0); transform: translateX(-1px); }
+  84%, 100% { opacity: 0; }
+}
+
+/* Stop-motion reel after the hero (Manifesto.tsx flips data-on / data-state). No attribute = visible, so no-JS and reduced motion see everything. */
+@media (prefers-reduced-motion: no-preference) {
+  .mf-frame {
+    transition:
+      opacity 0.45s steps(5),
+      translate 0.45s steps(5),
+      scale 0.45s steps(5),
+      clip-path 0.45s steps(5);
+  }
+  .mf-frame[data-on="false"] {
+    opacity: 0;
+    translate: 0 36px;
+  }
+  .mf-pop[data-on="false"] {
+    translate: none;
+    scale: 0.6;
+  }
+  .mf-turn[data-on="false"] {
+    translate: none;
+    clip-path: inset(0 100% 0 0);
+  }
+}
+/* large screens: the stage sticks; scenes sit on top of each other and swap in hard steps */
+@media (prefers-reduced-motion: no-preference) and (min-width: 1024px) and (min-height: 700px) {
+  .mf {
+    height: 380svh;
+  }
+  .mf-stick {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+  }
+  .mf-scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    transition:
+      opacity 0.4s steps(4),
+      translate 0.4s steps(4);
+  }
+  .mf-scene[data-state="off"] {
+    opacity: 0;
+    translate: 0 48px;
+    pointer-events: none;
+  }
+  .mf-scene[data-state="past"] {
+    opacity: 0;
+    translate: 0 -48px;
+    pointer-events: none;
+  }
+}
+
 /* entrances: one short fade-up, staggered with --i (Hero.tsx) */
 @media (prefers-reduced-motion: no-preference) {
   html {
@@ -524,5 +630,87 @@ main {
   from {
     opacity: 0;
     translate: 0 14px;
+  }
+}
+
+/* chip stack in the tournament clock (Clock.tsx sets --a and data-on). Reduced motion: the full stack, standing still. */
+.stk {
+  transform-style: preserve-3d;
+  transform: rotateX(62deg) rotateZ(var(--a, -20deg));
+}
+.stk-chip {
+  transform-style: preserve-3d;
+  transform: translate3d(var(--x), var(--y), var(--z));
+}
+@media (prefers-reduced-motion: no-preference) {
+  .stk {
+    transition: transform 0.3s steps(3);
+  }
+  .stk-chip {
+    transition:
+      transform 0.4s steps(4),
+      opacity 0.4s steps(4);
+  }
+  .stk-chip[data-on="false"] {
+    opacity: 0;
+    transform: translate3d(var(--x), var(--y), calc(var(--z) + 160px));
+  }
+}
+
+/* the schedule as stop-motion (Clock.tsx sets data-s on rows and --shift on the list); large screens only */
+@media (prefers-reduced-motion: no-preference) and (min-width: 1024px) and (min-height: 700px) {
+  .clk {
+    height: 330svh;
+  }
+  .clk-stick {
+    position: sticky;
+    top: 72px;
+    height: calc(100svh - 96px);
+  }
+  .clk-list {
+    translate: 0 var(--shift, 0);
+    transition: translate 0.4s steps(4);
+  }
+  .clk-row {
+    position: relative;
+    transition:
+      opacity 0.3s steps(3),
+      background-color 0.3s steps(3);
+  }
+  .clk-row[data-s="past"] {
+    opacity: 0.3;
+  }
+  .clk-row[data-s="next"] {
+    opacity: 0.55;
+  }
+  .clk-row[data-s="at"] {
+    background: color-mix(in oklab, var(--gold) 12%, transparent);
+    box-shadow: inset 3px 0 0 var(--gold-bright);
+  }
+  .clk-row[data-s="at"] .clk-what {
+    color: var(--gold-bright);
+  }
+  .clk-row[data-s="at"] .clk-chip {
+    animation: clk-flip 0.5s steps(5);
+  }
+}
+/* the level's chip flips over when you land on it */
+@keyframes clk-flip {
+  from {
+    transform: rotateY(180deg) scale(1.3);
+  }
+}
+
+/* team: the chip flips when you hover a seat (stop-motion, like the rest) */
+@media (prefers-reduced-motion: no-preference) {
+  .tm-card {
+    transition: border-color 0.3s steps(3), translate 0.3s steps(3);
+  }
+  .tm-card:hover {
+    border-color: var(--gold);
+    translate: 0 -4px;
+  }
+  .tm-card:hover .tm-chip {
+    animation: clk-flip 0.5s steps(5) reverse;
   }
 }

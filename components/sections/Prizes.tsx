@@ -9,7 +9,7 @@ const HEIGHT = [16, 7, 7, 4];
 export function Prizes() {
   const p = config.prizes;
   return (
-    <section id="prizes" aria-labelledby="prizes-title" className="relative px-5 py-24 md:px-10 md:py-36">
+    <section id="prizes" aria-labelledby="prizes-title" className="relative px-5 py-16 md:px-10 md:py-36">
       <div className="mx-auto max-w-[1440px]">
         <p className="eyebrow">Prizes</p>
         <div className="mt-5 flex flex-wrap items-end justify-between gap-6">

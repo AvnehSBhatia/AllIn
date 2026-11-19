@@ -72,7 +72,7 @@ export function Nav() {
               {DATE}
             </span>
           )}
-          <a href={config.applyUrl || "#apply"} className="btn btn-gold min-h-9 px-3.5 text-[12.5px]">
+          <a href={config.applyUrl || "#apply"} className="btn btn-gold min-h-10 px-3.5 text-[12.5px]">
             <span aria-hidden className="opacity-60">$</span> apply
           </a>
           <button

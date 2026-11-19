@@ -5,7 +5,7 @@ import { PlayingCard } from "@/components/ui/PlayingCard";
 export function Judging() {
   const j = config.judging;
   return (
-    <section id="judging" aria-labelledby="judging-title" className="relative px-5 py-24 md:px-10 md:py-36">
+    <section id="judging" aria-labelledby="judging-title" className="relative px-5 py-16 md:px-10 md:py-36">
       <div className="mx-auto max-w-[1440px]">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:items-end">
           <div>

@@ -3,7 +3,7 @@ import { config } from "@/lib/config";
 /** Talks and workshops. Until speakers are confirmed every chair reads "Seat open". */
 export function Workshops() {
   return (
-    <section id="talks" aria-labelledby="talks-title" className="relative px-5 py-24 md:px-10 md:py-28">
+    <section id="talks" aria-labelledby="talks-title" className="relative px-5 py-16 md:px-10 md:py-28">
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
         <div>
           <p className="eyebrow">Talks and workshops</p>

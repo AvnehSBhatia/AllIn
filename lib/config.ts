@@ -52,13 +52,15 @@ export const config = {
     { label: "Judging", href: "#judging" },
     { label: "Schedule", href: "#schedule" },
     { label: "Sponsors", href: "#sponsors" },
+    { label: "Team", href: "#team" },
     { label: "FAQ", href: "#faq" },
   ],
 
   reach: {
     label: "ExeaLabs · Open call",
     heading: "Built anywhere. Played in one room.",
-    body: "Applications are open to undergrads and researchers wherever they are. It's one day in Pleasanton, about 150 seats in teams of up to three, and every application is reviewed.",
+    body: "Applications are open to high schoolers and researchers wherever they are. It's one day in Pleasanton, about 150 seats in teams of up to three, and every application is reviewed.",
+    glitch: "Shuffle up and deal.",
   },
 
   manifesto: {
@@ -136,6 +138,22 @@ export const config = {
     { kind: "Workshop 2", title: "Announcing soon", speaker: null as string | null, time: "3:30 PM" },
   ],
 
+  // The organizers. title = the job as it would read on LinkedIn; job = what they actually do.
+  team: [
+    { name: "Avneh", title: "Co-founder · Chief Capital & Adjudication Officer", job: "Co-founded ExeaLabs. Finances, logistics, corporate sponsors and judges.", founder: true },
+    { name: "Joshua", title: "Co-founder · Chief Treasury & Partnerships Officer", job: "Co-founded ExeaLabs. Finances, logistics and sponsor outreach.", founder: true },
+    { name: "Andre", title: "Co-founder · Chief Fiscal & Operations Officer", job: "Co-founded ExeaLabs. Finances, logistics and local sponsors.", founder: true },
+    { name: "Jasraj", title: "Chief Interface Officer & Provisions Strategist", job: "Builds this website. Also food and sponsor outreach." },
+    { name: "Sahil", title: "VP, Real Estate Acquisition", job: "Venue and sponsor outreach." },
+    { name: "Amar", title: "Head of Physical Infrastructure", job: "Venue and sponsor outreach." },
+    { name: "Svanik", title: "Director of Caloric Logistics", job: "Food and sponsor outreach." },
+    { name: "Devom", title: "Principal, Capital Formation", job: "Sponsor outreach and judges." },
+    { name: "Shlok", title: "Director of Operational Logistics", job: "Logistics manager. Makes sure the day actually happens." },
+    { name: "Avyank", title: "Chief Narrative Officer", job: "Advertising and planning." },
+    { name: "Wesley", title: "VP, Signal Amplification", job: "Advertising and planning." },
+    { name: "Nicole", title: "Head of Social Presence", job: "Runs the socials." },
+  ] as { name: string; title: string; job: string; founder?: boolean }[],
+
   sponsors: {
     // Add confirmed sponsors only: { name: "Firm", href: "https://..." }
     title: [] as { name: string; href?: string }[],
@@ -146,7 +164,7 @@ export const config = {
   },
 
   faq: [
-    { q: "Who can apply?", a: "Undergrads and researchers. If you can write code and you're curious about game theory or AI, apply. Applications are reviewed." },
+    { q: "Who can apply?", a: "High schoolers and researchers. If you can write code and you're curious about game theory or AI, apply. Applications are reviewed." },
     { q: "How big are teams?", a: "Up to three people. With about 150 seats, that's around 50 teams." },
     { q: "How is the winner decided?", a: "Teams train and resubmit bots to a live leaderboard all day. After code freeze, a playoff bracket seats about six bots a table and the top two advance until one bot is left. Most technical and Most unique are judged separately." },
     { q: "How much does it cost?", a: "TBA." },

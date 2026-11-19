@@ -38,7 +38,7 @@ export function House() {
   };
 
   return (
-    <section id="sponsors" aria-labelledby="sponsors-title" className="relative overflow-x-clip px-5 py-24 md:px-10 md:py-36">
+    <section id="sponsors" aria-labelledby="sponsors-title" className="relative overflow-x-clip px-5 py-16 md:px-10 md:py-36">
       <div className="mx-auto max-w-[1440px]">
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
           <div>
