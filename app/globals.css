@@ -747,6 +747,34 @@ section[id] {
   min-height: 0;
   will-change: transform, opacity;
 }
+/* sharp card faces laid exactly over the five cards in the landing frame (the film itself is soft).
+   The inner box is the frame, fitted with the same centred cover as the canvas; cards sit in frame percentages. */
+.hero-board {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  height: 100svh;
+  container-type: size;
+  pointer-events: none;
+  opacity: 0;
+}
+.hero[data-film] .hero-board {
+  display: block;
+}
+.hero-board > div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: max(100cqw, 100cqh * 16 / 9);
+  aspect-ratio: 16 / 9;
+  translate: -50% -50%;
+}
+.hero-board .pc {
+  --w: calc(max(100cqw, 100cqh * 16 / 9) * 0.0795);
+  position: absolute;
+  translate: -50% -50%;
+}
 .hero[data-film] .hero-land {
   position: absolute;
   inset: 0;

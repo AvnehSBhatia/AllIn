@@ -2,6 +2,7 @@
 import { Fragment, useEffect, useRef } from "react";
 import { config } from "@/lib/config";
 import { FRAMES, POSTER_SMALL, frameSrc } from "@/lib/intro";
+import { PlayingCard } from "@/components/ui/PlayingCard";
 
 const FACTS = [
   ["When", config.date ? new Date(config.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/Los_Angeles" }) : config.dateWindow],
@@ -13,6 +14,14 @@ const FACTS = [
 const FILM = "(prefers-reduced-motion: no-preference) and (min-width: 1024px) and (min-height: 640px)";
 /** the camera move uses this share of the pinned scroll; the rest holds on the landing while the pitch arrives */
 const MOVE = 0.78;
+/** the board in the landing frame: card, centre (x, y in 1440×810 frame px), tilt in degrees */
+const BOARD = [
+  ["E♦", 307, 157, -9.5],
+  ["X♠", 504, 157, -1],
+  ["E♥", 698, 157, 0.5],
+  ["A♣", 891, 158, 5.7],
+  ["I♠", 1086, 157, 10],
+] as const;
 const clamp = (v: number) => Math.min(1, Math.max(0, v));
 const ease = (t: number) => t * t * (3 - 2 * t);
 
@@ -34,6 +43,7 @@ export function Hero() {
     const land = el.querySelector<HTMLElement>(".hero-land")!;
     const shade = el.querySelector<HTMLElement>(".hero-shade")!;
     const dim = el.querySelector<HTMLElement>(".hero-dim")!;
+    const board = el.querySelector<HTMLElement>(".hero-board")!;
     const mq = matchMedia(FILM);
     let teardown = () => {};
 
@@ -110,6 +120,7 @@ export function Hero() {
         shade.style.opacity = String(1 - out);
         dim.style.opacity = String(inn * 0.8);
         land.style.opacity = String(inn);
+        board.style.opacity = String(clamp(inn * 2));
         land.style.transform = `translate3d(0,${(26 * (1 - inn)).toFixed(1)}px,0)`;
         copy.inert = out > 0.6;
         land.inert = inn < 0.5;
@@ -134,7 +145,7 @@ export function Hero() {
         io.disconnect();
         ro.disconnect();
         removeEventListener("scroll", kick);
-        for (const n of [copy, land, shade, dim]) n.removeAttribute("style");
+        for (const n of [copy, land, shade, dim, board]) n.removeAttribute("style");
         copy.inert = land.inert = false;
         teardown = () => {};
       };
@@ -156,6 +167,13 @@ export function Hero() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={frameSrc(0)} srcSet={`${POSTER_SMALL} 800w, ${frameSrc(0)} 1440w`} sizes="100vw" alt="" fetchPriority="high" decoding="async" className="hero-poster" />
         <canvas ref={canvas} aria-hidden className="hero-canvas" />
+        <div aria-hidden className="hero-board">
+          <div>
+            {BOARD.map(([c, x, y, t]) => (
+              <PlayingCard key={c} code={c} style={{ left: `${(x / 1440) * 100}%`, top: `${(y / 810) * 100}%`, rotate: `${t}deg` }} />
+            ))}
+          </div>
+        </div>
         <div aria-hidden className="hero-shade" />
         <div aria-hidden className="hero-dim" />
         <div aria-hidden className="hero-foot" />
