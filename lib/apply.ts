@@ -4,7 +4,7 @@ export const MAX_LINKS = 3;
 
 /** One schema for the form and the API route. */
 export const applySchema = z.object({
-  name: z.string().trim().min(2, "Tell us what to call you.").max(80),
+  name: z.string().trim().min(2, "Enter your name.").max(80),
   email: z.email("That email doesn't look right.").max(120),
   affiliation: z.string().trim().min(2, "School, lab or company.").max(120),
   role: z.enum(["highschool", "researcher", "other"], "Pick one."),

@@ -62,7 +62,7 @@ export function Apply() {
       <div {...i(9, { "--from": "0px 40px", "--spin": "-1.5deg" })} className="a mt-12 w-full max-w-[44rem] text-left">
         {config.applyUrl ? (
           <div className="card flex flex-col items-center gap-5 p-9 text-center md:p-12">
-            <p className="text-ink-2">Applications run through our form.</p>
+            <p className="text-ink-2">Applications go through our form.</p>
             <a href={config.applyUrl} className="btn btn-brass" target="_blank" rel="noopener">
               Open the application <ArrowUpRight size={16} strokeWidth={1.75} />
             </a>
@@ -71,8 +71,8 @@ export function Apply() {
           <div className="card p-9 text-center md:p-12" role="status">
             <Chip color="gold" className="mx-auto mb-5 block size-12" />
             <p className="label text-oxblood">Received</p>
-            <p className="mt-3 font-display text-[2.2rem] leading-tight text-ink">Your chips are on the table.</p>
-            <p className="mx-auto mt-3 max-w-[40ch] text-ink-2">A person reads every application. You&apos;ll hear back by email once decisions go out.</p>
+            <p className="mt-3 font-display text-[2.2rem] leading-tight text-ink">We have your application.</p>
+            <p className="mx-auto mt-3 max-w-[40ch] text-ink-2">A person reads every one. You&apos;ll hear back by email when decisions go out.</p>
           </div>
         ) : (
           <form noValidate onSubmit={submit} className="card grid gap-x-9 gap-y-8 p-7 md:grid-cols-2 md:p-12">
@@ -87,7 +87,7 @@ export function Apply() {
               {err("email")}
             </label>
             <fieldset {...aria("role")}>
-              <legend className={label}>You are</legend>
+              <legend className={label}>Role</legend>
               <div className="mt-2.5 flex flex-wrap gap-2">
                 {ROLES.map(([v, l]) => (
                   <label key={v} className="cursor-pointer border border-ink/45 px-3.5 py-1.5 text-[1.05rem] text-ink transition-colors hover:border-ink has-[:checked]:border-ink has-[:checked]:bg-ink has-[:checked]:text-ivory has-[:focus-visible]:outline-1 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-oxblood">
@@ -104,18 +104,18 @@ export function Apply() {
               {err("affiliation")}
             </label>
             <label className="block md:col-span-2">
-              <span className={label}>What makes you different from the hundreds of other applicants?</span>
+              <span className={label}>What have you built, and what did you learn from it?</span>
               <textarea name="different" rows={3} className="field resize-y" {...aria("different")} />
               {err("different")}
             </label>
             <label className="block md:col-span-2">
-              <span className={label}>Why do you deserve a shot?</span>
+              <span className={label}>Why do you want one of the seats?</span>
               <textarea name="deserve" rows={3} className="field resize-y" {...aria("deserve")} />
               {err("deserve")}
             </label>
             <fieldset className="md:col-span-2" {...aria("links")}>
               <legend className={label}>
-                Links <span className="tracking-[0.12em] normal-case">· optional, up to {MAX_LINKS}</span>
+                Links <span className="tracking-[0.12em] normal-case">(optional, up to {MAX_LINKS})</span>
               </legend>
               <div className="grid gap-2">
                 {Array.from({ length: links }, (_, k) => (
@@ -132,10 +132,10 @@ export function Apply() {
             <input name="company" tabIndex={-1} autoComplete="off" aria-hidden className="absolute -left-[9999px] h-0 w-0" />
             <div className="flex flex-wrap items-center gap-4 md:col-span-2">
               <button type="submit" disabled={state === "sending"} className="btn btn-brass">
-                {state === "sending" ? "Sending" : "Request a seat"}
+                {state === "sending" ? "Sending" : "Send application"}
               </button>
               <p className="text-base text-ink-2 italic" aria-live="polite">
-                {state === "failed" ? "That didn't go through. Try again in a minute." : "Read by a person, not a filter."}
+                {state === "failed" ? "That didn't go through. Try again in a minute." : "We'll reply by email either way."}
               </p>
             </div>
           </form>
@@ -143,7 +143,7 @@ export function Apply() {
       </div>
 
       <div id="faq" className="mt-24 w-full max-w-[44rem] text-left">
-        <h3 className="eyebrow">Asked at the rail</h3>
+        <h3 className="eyebrow">Common questions</h3>
         <div className="mt-5 border-t border-hair">
           {config.faq.map((f, k) => (
             <div key={f.q} className="border-b border-hair-soft">
