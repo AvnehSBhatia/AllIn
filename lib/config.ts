@@ -97,7 +97,7 @@ export const config = {
       ],
       [
         { name: "Andre", title: "Lead of Management" },
-        { name: "Devom", title: "Technical Advisor" },
+        { name: "Devom", title: "Technical Capital Acquisition Advisor" },
         { name: "Amar", title: "Co-Lead of Venue Coordination" },
         { name: "Sahil", title: "Co-Lead of Venue Coordination" },
       ],
