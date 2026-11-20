@@ -105,7 +105,7 @@ export const config = {
         { name: "Jasraj", title: "Co-Lead of Sponsor Management" },
         { name: "Svanik", title: "Co-Lead of Sponsor Management" },
         { name: "Shlok", title: "Lead of Logistics" },
-        { name: "Avyank", title: "Lead of Outreach and Planning" },
+        { name: "Avyank", title: "Lead of Planning" },
         { name: "Wesley", title: "Lead of Operations" },
         { name: "Nicole", title: "Lead of Outreach" },
       ],
