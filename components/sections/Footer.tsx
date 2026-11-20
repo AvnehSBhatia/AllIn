@@ -6,7 +6,11 @@ export function Footer() {
       <div aria-hidden className="rule-gold absolute inset-x-0 top-0" />
       <div className="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-x-10 gap-y-3">
         <span className="label text-gold">
-          © {config.organizer} · {config.umbrella.split(" · ")[0]}
+          ©{" "}
+          <a href={config.organizerUrl} className="link" rel="noopener" target="_blank">
+            {config.organizer}
+          </a>{" "}
+          · {config.umbrella.split(" · ")[0]}
         </span>
         <span className="text-base text-text-3 italic">{config.safety}</span>
         {(config.contactEmail || config.socials.length > 0) && (

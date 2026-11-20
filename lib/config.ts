@@ -8,9 +8,10 @@ export const config = {
   name: "ALL IN",
   umbrella: "The Algorithmic Tournament · by ExeaLabs",
   organizer: "ExeaLabs",
+  organizerUrl: "https://www.exealabs.org/",
   url: "https://allin.exealabs.com", // TBA: final domain (used for SEO + share images)
 
-  tagline: "Build a bot. Bluff the machine. Go all in.",
+  tagline: "Write a poker bot in a day, then send it up against every other team's.",
   sub: "A one-day AI poker-bot tournament.",
 
   /** ISO string with timezone, e.g. "2027-01-30T09:00:00-08:00". null shows dateWindow instead. */
@@ -37,32 +38,32 @@ export const config = {
   panels: [{ id: "game" }, { id: "win" }, { id: "day" }, { id: "prizes" }, { id: "team" }, { id: "apply" }],
 
   open: {
-    heading: "No barrier to *entry.*",
-    body: "One application. No poker required.",
+    heading: "Open to *all.*",
+    body: "No need to know poker beforehand.",
     facts: ["High schoolers and researchers", "Teams of up to three", "About 150 seats"],
   },
 
   game: {
-    heading: "Poker is the *wild card.*",
-    body: "The best bot can still lose the hand.",
-    note: "Our own variant. No solver to download.",
+    heading: "Why it's *poker.*",
+    body: "Poker is an imperfect information game.",
+    note: "Our variant is going to require complex bot algorithms to dominate.",
     hand: ["E♠", "X♦", "E♣", "A♥"], // our deck: real suits, lettered indices. The fifth card stays face down
   },
 
   win: {
-    heading: "Last bot *standing.*",
-    body: "Top two at every table move on.",
+    heading: "How the bracket *works.*",
+    body: "The top two at each table move up, round after round.",
     steps: [
       { title: "Baseline", body: "Your bot plays ours." },
-      { title: "Leaderboard", body: "Your results rank you." },
+      { title: "Leaderboard", body: "Results set your seeding." },
       { title: "Tables", body: "Top two advance." },
-      { title: "Winner", body: "One bot is left." },
+      { title: "Winner", body: "Until one bot is left." },
     ],
   },
 
   day: {
     heading: "One *Saturday.*",
-    body: "January 30 at Zoho HQ, Pleasanton. Lunch and dinner are on us.",
+    body: "January 30 at Zoho HQ in Pleasanton. Lunch and dinner included.",
     schedule: [
       ["8:30 AM", "Doors open"],
       ["9:30 AM", "Building starts"],
@@ -74,52 +75,65 @@ export const config = {
   },
 
   prizes: {
-    heading: "$1,900 on the *table.*",
+    heading: "$1,900 in *prizes.*",
     // Same card, same size: none of these reads as the lesser prize.
     items: [
-      { how: "Wins the bracket", title: "Last bot standing", amount: "$1,200", extra: "Cash and glass trophies", suit: "s" },
+      { how: "Wins the bracket", title: "First place", amount: "$1,200", extra: "Cash and glass trophies", suit: "s" },
       { how: "Judges' pick", title: "Most technical", amount: "$300", extra: "Cash and a trophy", suit: "d" },
       { how: "Judges' pick", title: "Most unique", amount: "$300", extra: "Cash and a trophy", suit: "h" },
     ] as { how: string; title: string; amount: string; extra: string; suit: "s" | "h" | "d" | "c" }[],
-    raffle: "And a raffle: one $100 prize.",
+    raffle: "Plus one $100 raffle prize.",
   },
 
   // The organizers. Founders sit in the first row; everyone gets the same card.
   team: {
-    heading: "The *house.*",
+    heading: "Who's *running it.*",
     body: "ExeaLabs, with YRI and California STEM Innovators.",
+    // Co-Lead where two people share the same area; Lead otherwise.
     rows: [
       [
-        { name: "Avneh", title: "Chief Capital & Adjudication Officer", founder: true },
-        { name: "Joshua", title: "Chief Treasury & Partnerships Officer", founder: true },
+        { name: "Avneh", title: "Co-Founder of Exea Labs" },
+        { name: "Joshua", title: "Co-Founder of Exea Labs" },
       ],
       [
-        { name: "Andre", title: "Chief Fiscal & Operations Officer" },
-        { name: "Devom", title: "Principal, Capital Formation" },
-        { name: "Amar", title: "Head of Physical Infrastructure" },
-        { name: "Sahil", title: "VP, Real Estate Acquisition" },
+        { name: "Andre", title: "Lead of Management" },
+        { name: "Devom", title: "Technical Capital Acquisition Advisor" },
+        { name: "Amar", title: "Co-Lead of Venue Coordination" },
+        { name: "Sahil", title: "Co-Lead of Venue Coordination" },
       ],
       [
-        { name: "Jasraj", title: "Chief Interface & Operations Officer" },
-        { name: "Svanik", title: "Director of Caloric Logistics" },
-        { name: "Shlok", title: "Director of Operational Logistics" },
-        { name: "Avyank", title: "Chief Narrative Officer" },
-        { name: "Wesley", title: "VP, Signal Amplification" },
-        { name: "Nicole", title: "Head of Social Presence" },
+        { name: "Jasraj", title: "Co-Lead of Sponsor Management" },
+        { name: "Svanik", title: "Co-Lead of Sponsor Management" },
+        { name: "Shlok", title: "Lead of Logistics" },
+        { name: "Avyank", title: "Lead of Outreach and Planning" },
+        { name: "Wesley", title: "Lead of Operations" },
+        { name: "Nicole", title: "Lead of Outreach" },
       ],
-    ] as { name: string; title: string; founder?: boolean }[][],
+    ] as { name: string; title: string }[][],
+
+    /**
+     * Shown on plates under the organizers. Files live in public/partners, flattened to ink so they read on the card stock.
+     * `logo` is a complete lockup and stands alone; `mark` is a symbol that sits above the name; neither means the name is
+     * set in the label face on its own.
+     */
+    partnersLabel: "In partnership with",
+    partners: [
+      { name: "Exea_Labs", href: "https://www.exealabs.org/" },
+      { name: "YRI Fellowship", href: "https://www.yriscience.com/", mark: "/partners/yri-fellowship.png" },
+      { name: "California STEM Innovators", href: "https://californiasteminnovators.org/", logo: "/partners/ca-stem-innovators.png" },
+    ] as { name: string; href: string; logo?: string; mark?: string }[],
   },
 
   apply: {
-    heading: "Pull up a *chair.*",
+    heading: "Apply for a *seat.*",
     body: "Every application is read by a person.",
     deadline: null as string | null, // TBA
     maxLinks: 3,
   },
 
   faq: [
-    { q: "Who can apply?", a: "High schoolers and researchers. If you can write code and you're curious about game theory or AI, apply." },
-    { q: "Do I need to know poker?", a: "No. We play our own version of the game, so it's new to everyone. Comfort in one programming language is enough, and some probability helps." },
+    { q: "Who can apply?", a: "High schoolers and researchers. If you write code and you're curious about game theory or AI, you're who we're looking for." },
+    { q: "Do I need to know poker?", a: "No. We play our own version of the game, which is new to everyone. Being comfortable in one programming language is enough, and some probability helps." },
     { q: "How big are teams?", a: "Up to three people. You can also come alone." },
     { q: "How is the winner decided?", a: "Your bot plays our baseline bot to get on the leaderboard. Then bots are seated at tables, the top two at each table advance, and it repeats until one bot is left. Most technical and Most unique are picked by judges." },
     { q: "Where and when?", a: "Saturday, January 30, 2027, at Zoho HQ in Pleasanton, CA. Doors open 8:30 AM and close 8:30 PM. No overnight. Bring a laptop and charger." },
